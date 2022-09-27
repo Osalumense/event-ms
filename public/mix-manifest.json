@@ -1,0 +1,21 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/css/bootstrap.min.css": "/css/bootstrap.min.css",
+    "/css/style.css": "/css/style.css",
+    "/assets/notiflix/.eslintrc.json": "/assets/notiflix/.eslintrc.json",
+    "/assets/notiflix/.gitignore": "/assets/notiflix/.gitignore",
+    "/assets/notiflix/.stylelintrc.json": "/assets/notiflix/.stylelintrc.json",
+    "/assets/notiflix/babel.config.js": "/assets/notiflix/babel.config.js",
+    "/assets/notiflix/CNAME": "/assets/notiflix/CNAME",
+    "/assets/notiflix/CODE_OF_CONDUCT.md": "/assets/notiflix/CODE_OF_CONDUCT.md",
+    "/assets/notiflix/CONTRIBUTING.md": "/assets/notiflix/CONTRIBUTING.md",
+    "/assets/notiflix/index.d.test.ts": "/assets/notiflix/index.d.test.ts",
+    "/assets/notiflix/index.d.ts": "/assets/notiflix/index.d.ts",
+    "/assets/notiflix/jest.config.js": "/assets/notiflix/jest.config.js",
+    "/assets/notiflix/LICENSE": "/assets/notiflix/LICENSE",
+    "/assets/notiflix/package.json": "/assets/notiflix/package.json",
+    "/assets/notiflix/README.md": "/assets/notiflix/README.md",
+    "/assets/notiflix/tsconfig.json": "/assets/notiflix/tsconfig.json",
+    "/assets/notiflix/yarn.lock": "/assets/notiflix/yarn.lock"
+}

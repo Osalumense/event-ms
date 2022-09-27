@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div>
+    <div class="p-3">
         <div class="grid grid-cols-1 gap-5 mt-6 sm:grid-cols-1 lg:grid-cols-4">
             <div
                 class="min-w-0 transition-shadow border rounded-lg shadow-sm hover:shadow-lg overflow-hidden bg-white dark:bg-gray-800"

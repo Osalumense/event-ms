@@ -1,51 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div>
-        {{-- <div class="grid grid-cols-1 gap-5 mt-6 sm:grid-cols-1 lg:grid-cols-3">
-            <div class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg bg-white">
-                <div class="flex items-start justify-between">
-                    <div class="flex flex-col space-y-2">
-                        <span class="text-gray-400">Total Users</span>
-                        <span class="text-lg font-semibold">{{$total_users}}</span>
-                    </div>
-                    <div class="p-10 bg-gray-200 rounded-md">
-                        <span>
-                            <i class='bx bx-calendar-check bx-sm'></i>
-                        </span>
-                    </div>
-                </div>
-            
-            </div>
-            <div class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg bg-white">
-                <div class="flex items-start justify-between">
-                    <div class="flex flex-col space-y-2">
-                    <span class="text-gray-600">Events Created</span>
-                    <span class="text-lg font-semibold">100,221</span>
-                    </div>
-                    <div class="p-10 bg-gray-200 rounded-md">
-                        <span>
-                            <i class='bx bx-calendar-check bx-sm'></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg bg-white">
-                <div class="flex items-start justify-between">
-                    <div class="flex flex-col space-y-2">
-                        <span class="text-gray-400">Tickets sold</span>
-                        <span class="text-lg font-semibold">100,221</span>
-                    </div>
-                    <div class="p-10 bg-gray-200 rounded-md">
-                        <span>
-                            <i class='bx bx-calendar-check bx-sm'></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            </div>        
-        </div> --}}
+    <div class="p-3">
         <div class="grid grid-cols-1 gap-5 mt-6 sm:grid-cols-1 lg:grid-cols-4">
             <div
                 class="min-w-0 transition-shadow border rounded-lg shadow-sm hover:shadow-lg overflow-hidden bg-white dark:bg-gray-800"

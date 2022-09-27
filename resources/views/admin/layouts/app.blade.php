@@ -116,7 +116,8 @@
               </div>
             </header>
             <!-- Main content -->
-            <main class="flex-1 max-h-full p-5 overflow-hidden bg-gray-100 overflow-y-scroll">
+            <main class="flex-1 max-h-full 
+            overflow-hidden bg-gray-100 overflow-y-auto">
               @if (session('success'))
                     <div class="flex justify-center">
                         <div x-data="{show: true}" x-show="show" x-init="setTimeout(() => show = false, 7000)"
@@ -226,6 +227,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <script>
           function APP() {
           }

@@ -1,15 +1,10 @@
 # HCS
 
 ## Description
-A mental health counselling application developed in the Laravel framework, the appplication enables users to enjoy counselling sessions from the comfort of their homes either through chat and video calls.
+An event management system.
 It is still a work in progress...
 
 ## Screenshot
-#### Homepage
-![hcs home](https://user-images.githubusercontent.com/43953425/151820511-40400477-d480-42f0-9364-f274bd43db8a.PNG) 
-
-#### Login page
-![HCS login](https://user-images.githubusercontent.com/43953425/151820612-0ee91bec-5d00-408e-984a-940e617898fd.PNG)
 
 
 ## Steps to run in local machine
@@ -24,5 +19,5 @@ It is still a work in progress...
 - Run ```php artisan serve``` to serve up the application
 - The application can then be viewed on your local machine.
 
-# Integrated-Vehicle-registration
+# Event Management System
 # event-ms

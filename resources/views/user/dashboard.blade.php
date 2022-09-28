@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="p-3">
+        <div class="my-4">
+            <a href="#">View Organizer Homepage</a>
+        </div>
         <div class="grid grid-cols-1 gap-5 mt-6 sm:grid-cols-1 lg:grid-cols-4">
             <div
                 class="min-w-0 transition-shadow border rounded-lg shadow-sm hover:shadow-lg overflow-hidden bg-white dark:bg-gray-800"
@@ -16,11 +19,10 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Total events
+                    Total events created
                     </p>
                     <p class="text-lg font-semibold text-gray-700">
-                        {{-- {{$total_users}} --}}
-                        4
+                        {{$total_events}}
                     </p>
                 </div>
                 </div>
@@ -86,30 +88,28 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Total events created
+                    Total attendees
                     </p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">589,234</p>
+                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">234</p>
                 </div>
                 </div>
             </div>
         </div>
         <div class="grid grid-cols-1 gap-5 mt-6 sm:grid-cols-1 lg:grid-cols-3">
-            <div class="col-span-1 bg-white p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg text-gray-500">
-                <h4 class="text-lg font-semibold  mb-3">Recent events</h4>
+            <div class="col-span-2 bg-white p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg text-gray-500">
+                <h4 class="text-lg font-semibold  mb-3">Recently created events</h4>
                 <hr/>
-                {{-- @foreach ($recently_added_users as $recent_users)
-                    <div class="space-y-4">                  
-                        <h5 class="font-semibold my-2">
-                            {{$recent_users['last_name']}} {{$recent_users['first_name']}}                
-                        </h5>
-                        <hr/>
-                    </div>
-                @endforeach --}}
+                @foreach ($recently_added_events as $recent_events)
+                <div class="flex justify-between py-3">
+                    <p>{{$recent_events['title']}}</p>
+                    <span class="bg-indigo-50 text-indigo-700 p-2 rounded-full">{{$recent_events['start_date']}}</span>
+                </div>
+                <hr/>
+                @endforeach
             </div>
-            <div class="col-span-2 bg-white p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
+            <div class="col-span-1 bg-white p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
             </div>
         </div>
-        
     </div>
         
 @endsection

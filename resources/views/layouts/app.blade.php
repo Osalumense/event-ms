@@ -11,17 +11,16 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{mix('css/app.css')}}">
     @yield('styles')
     @include('layouts.frontend.header')
-
-    <main class="mt-32">
+</head>
+<body class="bg-gray-200">
+    <main class="mt-32 bg-gray-200">
         @yield('content')
     </main>
-    
-
     @include('layouts.frontend.footer')
-
 
     <script src="{{URL::asset('js/script.js')}}"></script>
     <script src="{{URL::asset('js/aos.js')}}"></script>
@@ -30,9 +29,6 @@
     <script src="{{URL::asset('js/app.js')}}"></script>
 
     @yield('scripts')
-    @stack('inline-scripts')
-</head>
-<body>
-    
+    @stack('inline-scripts')    
 </body>
 </html>

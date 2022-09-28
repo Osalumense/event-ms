@@ -35,6 +35,7 @@ class CreateEventsTable extends Migration
             $table->text('post_order_display_message')->nullable();
             // $table->unsignedInteger('currency_id')->nullable();
             // $table->foreign('currency_id')->references('id')->on('currencies');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

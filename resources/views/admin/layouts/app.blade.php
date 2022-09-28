@@ -13,8 +13,7 @@
       [x-cloak] { 
             display: none !important; 
         }
-    </style>
-    
+    </style> 
     @yield('styles')
 </head>
 <body>
@@ -173,9 +172,6 @@
                     </div>
                 @endif
               @yield('content')
-
-
-              
             </main>
 
             <!-- Main footer -->
@@ -223,7 +219,7 @@
           </div> --}}
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>

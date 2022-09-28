@@ -37,6 +37,7 @@ class CreateTicketsTable extends Migration
             $table->integer('quantity_reserved');
             $table->datetime('expires');
             $table->string('session_id', 45);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

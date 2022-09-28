@@ -1,4 +1,4 @@
-# HCS
+# EMS
 
 ## Description
 An event management system.

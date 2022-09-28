@@ -24,6 +24,7 @@ Route::group(['middleware' => ['admin-auth']], function () {
     Route::get('/dashboard', [PageController::class, 'renderOrganizerDashboard']);
     Route::group(['prefix' => 'events'], function () {
         Route::get('/', [PageController::class, 'renderEventDashboard']);
+        Route::post('/', [PageController::class, 'saveEventDetails']);
     });
     
 });

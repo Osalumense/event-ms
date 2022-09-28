@@ -89,9 +89,9 @@
                       :class="{'justify-center': !isSidebarOpen}"
                     >
                       <span>
-                        <i class='bx bx-user-check bx-sm'></i>
+                        <i class='bx bx-barcode bx-sm'></i>
                       </span>
-                      <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
+                      <span :class="{ 'lg:hidden': !isSidebarOpen }">Tickets</span>
                     </a>
                 </li>
                 <li>
@@ -101,25 +101,26 @@
                       :class="{'justify-center': !isSidebarOpen}"
                     >
                       <span>
-                        <i class='bx bx-user-check bx-sm'></i>
+                        <i class='bx bxs-user-badge bx-sm'></i>
                       </span>
-                      <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
+                      <span :class="{ 'lg:hidden': !isSidebarOpen }">Attendees</span>
                     </a>
                 </li>
                 @endif
 
-                  <li>
-                    <a
-                      href="{{ url('/admin/vehicles') }}"
-                      class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
-                      :class="{'justify-center': !isSidebarOpen}"
-                    >
-                      <span>
-                        <i class='bx bx-car bx-sm'></i>
-                      </span>
-                      <span :class="{ 'lg:hidden': !isSidebarOpen }">Vehicles</span>
-                    </a>
-                  </li>
+                <li>
+                  <a
+                    href="#"
+                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                    :class="{'justify-center': !isSidebarOpen}"
+                  >
+                    <span>
+                      <i class='bx bx-user bx-sm'></i>
+                    </span>
+                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Profile</span>
+                  </a>
+                </li>
+
                 <!-- Sidebar Links... -->
               </ul>
             </nav>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Http\Controllers\vendor\Chatify\MessagesController;
+use App\Models\Events;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -200,6 +200,11 @@ class HomeController extends Controller
             return redirect()->back();
         }
 
+    }
+
+    public function getAllEvents()
+    {
+        return Events::getEventCount();
     }
 
     

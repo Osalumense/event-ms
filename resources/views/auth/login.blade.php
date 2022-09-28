@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="contact d-flex align-items-center bg-gray-200">
-    <div class="min-h-screen flex justify-center items-center">
+    <div class="flex justify-center items-center">
         <div class="p-10 border-2 border-slate-200 rounded-lg flex flex-col items-center space-y-3 bg-white">
           <div class="pt-8">
             <h1 class="-mt-10 font-semibold text-2xl">Event management System</h1>

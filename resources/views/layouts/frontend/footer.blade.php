@@ -1,6 +1,18 @@
-<footer class="bg-gray-800 pt-10 sm:mt-10 pt-10 w-full">
-    <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-left">
+<footer class="bg-gray-800 px-6 sm:mt-10 pt-10 w-full">
+    <div class=" m-auto text-gray-800 flex flex-wrap justify-left">
         <!-- Col-1 -->
+        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+            <!-- Col Title -->
+            <div class="text-xl uppercase text-gray-400 font-medium mb-6">
+                Event MS
+            </div>
+            
+
+            <!-- Links -->
+            
+        </div>
+
+        <!-- Col-2 -->
         <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
             <!-- Col Title -->
             <div class="text-xs uppercase text-gray-400 font-medium mb-6">
@@ -11,84 +23,20 @@
             <a
                 href="#"
                 class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Installation
+                Creating your first event
             </a>
             <a
                 href="#"
                 class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Release Notes
+                Managing Events
             </a>
             <a
                 href="#"
                 class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Upgrade Guide
-            </a>
-            <a
-                href="#"
-                class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Using with Preprocessors
-            </a>
-            <a
-                href="#"
-                class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Optimizing for Production
-            </a>
-            <a
-                href="#"
-                class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Browser Support
-            </a>
-            <a
-                href="#"
-                class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                IntelliSense
+                Managing Tickets
             </a>
         </div>
-
-        <!-- Col-2 -->
-        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
-            <!-- Col Title -->
-            <div class="text-xs uppercase text-gray-400 font-medium mb-6">
-                Core Concepts
-            </div>
-
-            <!-- Links -->
-            <a
-                href="#"
-                class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Utility-First
-            </a>
-            <a
-                href="#"
-                class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Responsive Design
-            </a>
-            <a
-                href="#"
-                class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Hover, Focus, & Other States
-            </a>
-            <a
-                href="#"
-                class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Dark Mode
-            </a>
-            <a
-                href="#"
-                class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Adding Base Styles
-            </a>
-            <a
-                href="#"
-                class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Extracting Components
-            </a>
-            <a
-                href="#"
-                class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                Adding New Utilities
-            </a>
-        </div>
+        
 
         <!-- Col-3 -->
         <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
@@ -169,25 +117,19 @@
     <!-- Copyright Bar -->
     <div class="pt-2">
         <div
-            class="flex pb-5 px-3 m-auto pt-5 border-t border-gray-500 text-gray-400 text-sm flex-col md:flex-row max-w-6xl">
+            class="flex pb-5 px-3 m-auto pt-5 border-t border-gray-500 text-gray-400 text-sm flex-col md:flex-row">
             <div class="mt-2">© Copyright 1998-year. All Rights Reserved.</div>
 
             <!-- Required Unicons (if you want) -->
             <div class="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
                 <a href="#" class="w-6 mx-1">
-                    <i class="uil uil-facebook-f"></i>
+                    <i class='bx bxl-facebook-square bx-md mx-2'></i>
                 </a>
                 <a href="#" class="w-6 mx-1">
-                    <i class="uil uil-twitter-alt"></i>
+                    <i class="bx bxl-linkedin bx-md mx-2"></i>
                 </a>
                 <a href="#" class="w-6 mx-1">
-                    <i class="uil uil-youtube"></i>
-                </a>
-                <a href="#" class="w-6 mx-1">
-                    <i class="uil uil-linkedin"></i>
-                </a>
-                <a href="#" class="w-6 mx-1">
-                    <i class="uil uil-instagram"></i>
+                    <i class='bx bxl-instagram bx-md mx-2'></i>
                 </a>
             </div>
         </div>

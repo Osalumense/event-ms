@@ -20,13 +20,25 @@ class EventController extends Controller
     {
         $getEvent = Events::getActiveEventBySlug($slug);
         $event = count($getEvent) > 0 ? $getEvent[0] : [];
-        
         if(count($event) > 1){
             $getUser = User::get($event['user_id']);
         };
         $user = count($getEvent) > 0 ? $getUser : [];
-        // dd($user);
         return view('user.events.public_events')->with([
+            'event' => $event,
+            'user' => $user
+        ]);
+    }
+
+    public function renderEventRegistrationPage($slug)
+    {
+        $getEvent = Events::getActiveEventBySlug($slug);
+        $event = count($getEvent) > 0 ? $getEvent[0] : [];
+        if(count($event) > 1){
+            $getUser = User::get($event['user_id']);
+        };
+        $user = count($getEvent) > 0 ? $getUser : [];
+        return view('user.events.register')->with([
             'event' => $event,
             'user' => $user
         ]);

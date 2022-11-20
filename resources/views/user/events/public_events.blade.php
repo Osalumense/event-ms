@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    {{-- {{$event['title']}} --}}
     @if(count($event) > 0)
         <head>
             <meta charset="UTF-8">
@@ -13,7 +12,7 @@
                 src="{{asset('images/events').'/'.$event['bg_image_path']}}"
             @else
                 src="https://images.pexels.com/photos/3747463/pexels-photo-3747463.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260" 
-            @endif">    
+            @endif>    
             <title>{{$event['title'] . ' - ' . config('app.name', 'Laravel') }}</title>
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
             <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -39,7 +38,11 @@
                                 {{$event['title']}}
                             </h2>
                             <div class="border-t-4 border-white w-24 mx-auto my-4 mb-12"></div>
-                            <a href="" class="px-6 mt-8 py-2 bg-transparent outline-none border-2 border-indigo-600 rounded text-indigo-600 font-medium active:scale-95 hover:bg-indigo-700 hover:text-white hover:border-transparent focus:bg-indigo-700 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2 transition-colors duration-200">Register</a>
+                            @if ( \Carbon\Carbon::now() > $event['end_date'] )
+                                <button type="button" class="px-6 mt-8 py-2 bg-gray-400 outline-none border-2 border-indigo-600 rounded text-indigo-600 font-medium active:scale-95 focus:bg-indigo-700 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2 transition-colors duration-200 cursor-not-allowed" disabled>Registration closed</button>
+                            @else
+                                <a href="{{url('/e/').'/'.$event['slug']}}/register" class="px-6 mt-8 py-2 bg-transparent outline-none border-2 border-indigo-600 rounded text-indigo-600 font-medium active:scale-95 hover:bg-indigo-700 hover:text-white hover:border-transparent focus:bg-indigo-700 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2 transition-colors duration-200">Register</a>
+                            @endif
                         </div>
                         </div>
                     </div>
@@ -62,7 +65,7 @@
                     </div>
                 </section>
                 <section class="relative py-16 bg-blueGray-200">
-                    <div class="container mx-auto px-2">
+                    <div class="container mx-auto md:px-2">
                         <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
                          <div class="">
                             <div class="text-center mt-12">
@@ -77,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="mt-10 py-10 border-t-2 border-gray-200 flex flex-col justify-center">
-                                <div class="flex flex-col space-y-4 justify-center text-center mx-auto">
+                                <div class="flex flex-col space-y-4 justify-center text-center mx-auto px-5">
                                     <div class="w-full px-4">
                                         <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
                                             {!!$event['description']!!}
@@ -86,7 +89,12 @@
                                     
                                 </div>
                                 <div class="mt-6 flex justify-center border-t-2 border-gray-200">
-                                    <a href="" class="px-6 mt-5 py-2 bg-transparent outline-none border-2 border-indigo-400 rounded text-indigo-500 font-medium active:scale-95 hover:bg-indigo-600 hover:text-white hover:border-transparent focus:bg-indigo-600 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 disabled:bg-gray-400/80 disabled:shadow-none disabled:cursor-not-allowed transition-colors duration-200">Register</a>
+                                    @if ( \Carbon\Carbon::now() > $event['end_date'] )
+                                        <button type="button" class="px-6 mt-5 py-2 bg-gray-300 outline-none border-2 border-indigo-400 rounded text-indigo-500 font-medium active:scale-95 focus:bg-indigo-600 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 cursor-not-allowed transition-colors duration-200" disabled>Registration closed</button>
+                                    @else
+                                        <a href="{{url('/e/').'/'.$event['slug']}}/register" class="px-6 mt-5 py-2 bg-transparent outline-none border-2 border-indigo-400 rounded text-indigo-500 font-medium active:scale-95 hover:bg-indigo-600 hover:text-white hover:border-transparent focus:bg-indigo-600 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 disabled:bg-gray-400/80 disabled:shadow-none disabled:cursor-not-allowed transition-colors duration-200">Register</a>
+                                    @endif
+                                        
                                 </div>
                             </div>
                         </div>
@@ -108,14 +116,21 @@
             </section>
         
             <footer class="bg-gray-800">
-                <div class="pt-8 px-6 flex flex-col md:flex-row md:items-center text-gray-400">
-                    <div
-                        class="flex pb-5 px-3 m-auto pt-5  text-sm">© Copyright <?=date('Y');?> All Rights Reserved {{config('app.name')}}.
-                    </div>
-                    <div class="order-1 md:order-2">
-                        <a href="{{url('/dashboard')}}" class="px-2">Create an event</a>
-                        <span class="px-2 border-l">Contact us</span>
-                        <span class="px-2 border-l">Privacy Policy</span>
+                <div class="sm:flex sm:items-center sm:justify-center text-gray-400 px-5 m-auto pt-4">
+                    
+                </div>
+                <div class="sm:flex sm:items-center sm:justify-between text-gray-400 px-5 m-auto py-8">
+                    <span class="text-sm sm:text-center">© Copyright <?=date('Y');?> All Rights Reserved {{config('app.name')}}.
+                    </span>
+                    <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+                        <div class="order-1 md:order-2">
+                            @if (Auth::user() && $user['account_id'] == Auth::user()->id)
+                                    <a href="{{url('/events/').'/'.$event['slug']}}" class="px-2 border-l">Event Dashboard</a>
+                            @endif
+                            <a href="{{url('/dashboard')}}" class="px-2 border-l">Create an event</a>
+                            <span class="px-2 border-l">Contact</span>
+                            <span class="px-2 border-l border-r">Privacy Policy</span>
+                        </div>
                     </div>
                 </div>
             </footer>

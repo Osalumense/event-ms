@@ -28,7 +28,7 @@ function scrollFunction() {
 
 // NAVBAR ON MOBILE
 const showMenu = () => {
-    document.querySelector(".offcanvas-collapse").classList.toggle("open");
+    document.querySelector("#navbar").classList.toggle("hidden");
 //     let elements = document.querySelector(".offcanvas-collapse");
 
 //     for (let i = 0; i < elements.length; i++) {
@@ -84,31 +84,6 @@ if (dropdownCheck !== null) {
     });
 }
 
-/* CARD SLIDER - SWIPER */
-// var cardSlider = new Swiper(".card-slider", {
-//     autoplay: {
-//         delay: 4000,
-//         disableOnInteraction: false,
-//     },
-//     loop: true,
-//     navigation: {
-//         nextEl: ".swiper-button-next",
-//         prevEl: ".swiper-button-prev",
-//     },
-//     slidesPerView: 3,
-//     spaceBetween: 70,
-//     breakpoints: {
-//         // when window is <= 767px
-//         767: {
-//         slidesPerView: 1,
-//         },
-//         // when window is <= 991px
-//         991: {
-//         slidesPerView: 2,
-//         spaceBetween: 40,
-//         },
-//     },
-// });
 
 /* BACK TO TOP BUTTON */
 // GET THE BUTTON
@@ -133,16 +108,3 @@ function topFunction() {
     document.documentElement.scrollTop = 0; // for Chrome, Firefox, IE and Opera
 }
 
-// AOS ANIMATION ON SCROLL
-// const aos_init = () => {
-//     AOS.init({
-//       once: true,
-//       duration: 1000,
-//       easing: "ease-in-out",
-//       mirror: false
-//     });
-//   }
-//   window.addEventListener('load', () => {
-//     aos_init();
-//   });
-})();

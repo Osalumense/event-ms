@@ -16,16 +16,15 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('account_id')->index();
-            $table->unsignedInteger('order_id')->nullable();
+            $table->string('title');
+            $table->unsignedInteger('account_id');
+            $table->unsignedInteger('user_id');
+            $table->bigInteger('event_id');
+            // $table->unsignedInteger('order_id')->nullable();
             $table->decimal('price', 13, 2);
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
             $table->integer('quantity_available')->nullable()->default(null);
             $table->integer('quantity_sold')->default(0);
-            $table->dateTime('start_sale_date')->nullable();
-            $table->dateTime('end_sale_date')->nullable();
-            $table->unsignedInteger('user_id');
-            $table->boolean('is_live')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

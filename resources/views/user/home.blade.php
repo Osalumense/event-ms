@@ -11,7 +11,7 @@
             transform: translatey(0px);
         }
         50% {
-            transform: translatey(-20px);
+            transform: translatey(-5px);
         }
         100% {
             transform: translatey(0px);
@@ -21,17 +21,21 @@
 
 @section('content')
 <section class="bg-gray-50">
-    <div class="grid max-w-screen-xl px-4 py-8 mx-auto -mt-12 lg:-mt-36 lg:gap-8 xl:gap-0 lg:py-12 lg:grid-cols-12">
+    <div class="grid max-w-screen-xl px-12 py-8 mx-auto -mt-12 lg:-mt-36 lg:gap-8 xl:gap-0 lg:py-12 lg:grid-cols-12">
         <div class="mr-auto place-self-center lg:col-span-7">
             <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none md:text-5xl xl:text-6xl text-indigo-600">Seamless Event management</h1>
             <p class="max-w-2xl mb-6 font-semibold text-gray-500 lg:mb-8 md:text-lg lg:text-xl">Create and manage your events seamlessly in one platform.</p>
-            <a href="{{url('/dashboard')}}" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 group">
-                Get started
-                <svg class="w-5 h-5 ml-2 -mr-1 group-hover:translate-x-2 transition-all ease-in duration-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-            </a>
-            <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-indigo-600 border border-indigo-500 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100">
-                View events
-            </a> 
+            <div class="flex flex-col md:flex-row lg:space-x-4 space-y-6 lg:space-y-0 mt-8">
+                <a href="{{url('/dashboard')}}" class="w-full items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 group">
+                    Get started
+                    <svg class="w-5 h-5 ml-2 -mr-1 group-hover:translate-x-2 transition-all ease-in duration-500 inline-flex" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </a>
+                {{-- inline-flex w-full items-center justify-center px-5 py-3 text-base font-medium text-center text-indigo-600 border border-indigo-500 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 --}}
+                <a href="#" class="inline-flex w-full items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300">
+                    View events
+                </a>
+            </div>
+             
         </div>
         <div class="hidden lg:flex lg:mt-0 lg:col-span-5">
             <img src="{{asset('/img/hero-img.png')}}" class="bounce" alt="mockup">
@@ -43,7 +47,7 @@
     <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
         <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
             <h2 class="mb-4 text-3xl md:text-4xl font-extrabold text-indigo-600">Create and Manage Events seamlessly</h2>
-            <h5 class="mb-4 text-xl font-semibold">EMS has everything you need for a successful event.</h5>
+            <h5 class="mb-4 text-xl font-semibold">{{config('app.name')}} has everything you need for a successful event.</h5>
             <p class="mb-4 flex md:text-lg"><span class="text-indigo-500 inline-flex items-center md:items-end"><i class='bx bx-check bx-sm mr-2'></i></span> Seamlessly Create online or in-person events</p>
             <p class="mb-4 flex md:text-lg"><span class="text-indigo-500 inline-flex items-center md:items-end"><i class='bx bx-check bx-sm mr-2'></i></span> Customized and multiple ticket types for events</p>
             <p class="mb-4 flex md:text-lg"><span class="text-indigo-500 inline-flex items-center md:items-end"><i class='bx bx-check bx-sm mr-2'></i></span> Easy attendees Management</p>
@@ -59,9 +63,87 @@
     </div>
 </section>
 
-{{-- <section class="bg-white dark:bg-gray-900">
+<section class="bg-gray-50 dark:bg-gray-800">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+        <div class="max-w-screen-xl mb-8 lg:mb-16">
+            <h2 class="mb-4 text-4xl font-extrabold text-indigo-600">Designed to make events management easy</h2>
+            <p class="text-gray-500 sm:text-xl">Create a simple event website, set up custom registration processes, manage attendees, payments, tickets and badges.</p>
+        </div>
+        <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+            <div class="shadow-md p-4 rounded-md bg-white">
+                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-indigo-100 lg:h-12 lg:w-12 dark:bg-indigo-900">
+                    <i class='bx bx-link-external bx-sm w-5 h-5 text-indigo-600 lg:w-6 lg:h-6'></i>
+                </div>
+                <h3 class="mb-2 text-xl font-bold text-indigo-600">Unique event URL</h3>
+                <p class="text-gray-500 dark:text-gray-400">Plan it, create it, launch it and get a unique URL for your event</p>
+            </div>
+            <div class="shadow-md p-4 rounded-md bg-white">
+                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-indigo-100 lg:h-12 lg:w-12">
+                    <i class='bx bxs-cog bx-sm w-5 h-5 text-indigo-600 lg:w-6 lg:h-6'></i>
+                </div>
+                <h3 class="mb-2 text-xl font-bold text-indigo-600">Intuitive Admin Interface</h3>
+                <p class="text-gray-500 dark:text-gray-400">Stay in charge of your events, tickets and attendees all in one place.</p>
+            </div>
+            <div class="shadow-md p-4 rounded-md bg-white">
+                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-indigo-100 lg:h-12 lg:w-12 dark:bg-indigo-900">
+                    <i class='bx bxs-credit-card bx-sm w-5 h-5 text-indigo-600 lg:w-6 lg:h-6'></i>                    
+                </div>
+                <h3 class="mb-2 text-xl font-bold text-indigo-600">Accept payments</h3>
+                <p class="text-gray-500 dark:text-gray-400">Need to collect payments? EMS allows you accept payments for tickets esaily.</p>
+            </div>
+            {{-- <div>
+                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
+                </div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Finance</h3>
+                <p class="text-gray-500 dark:text-gray-400">Audit-proof software built for critical financial operations like month-end close and quarterly budgeting.</p>
+            </div>
+            <div>
+                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
+                </div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Enterprise Design</h3>
+                <p class="text-gray-500 dark:text-gray-400">Craft beautiful, delightful experiences for both marketing and product with real cross-company collaboration.</p>
+            </div>
+            <div>
+                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
+                </div>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">Operations</h3>
+                <p class="text-gray-500 dark:text-gray-400">Keep your company’s lights on with customizable, iterative, and structured workflows built for all efficient teams and individual.</p>
+            </div> --}}
+        </div>
+    </div>
+</section>
+
+
+{{-- <section class="bg-white dark:bg-gray-900 dark:bg-gray-800">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="max-w-screen-xl text-gray-500 sm:text-lg dark:text-gray-400">
+            <h2 class="mb-4 text-4xl font-bold text-indigo-600">Powering innovation at <span class="font-extrabold">200,000+</span> companies worldwide</h2>
+            <p class="mb-4 font-light">Track work across the enterprise through an open, collaborative platform. Link issues across Jira and ingest data from other software development tools, so your IT support and operations teams have richer contextual information to rapidly respond to requests, incidents, and changes.</p>
+            <p class="mb-4 font-medium">Deliver great service experiences fast - without the complexity of traditional ITSM solutions.Accelerate critical development work, eliminate toil, and deploy changes with ease.</p>
+            <a href="#" class="inline-flex items-center font-medium text-blue-600 hover:text-blue-800 dark:text-blue-500 dark:hover:text-blue-700">
+                Learn more
+                <svg class="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+            </a>
+        </div>
+    </div>
+</section> --}}
+
+<section class="bg-white dark:bg-gray-900">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+        <div class="mx-auto max-w-screen-sm text-center">
+            <h2 class="mb-4 text-4xl font-extrabold leading-tight text-indigo-600">Ready to get started?</h2>
+            <p class="mb-6 font-light text-gray-500 md:text-lg">Create and manage events at no cost</p>
+            <a href="{{url('/dashboard')}}" class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Create Event now</a>
+        </div>
+    </div>
+</section>
+
+<section class="bg-white dark:bg-gray-900">
     <div class="py-8 lg:py-16 mx-auto max-w-screen-xl px-4">
-        <h2 class="mb-8 lg:mb-16 text-3xl font-extrabold tracking-tight leading-tight text-center text-gray-900 dark:text-white md:text-4xl">You’ll be in good company</h2>
+        <h2 class="mb-8 lg:mb-16 text-3xl font-extrabold tracking-tight leading-tight text-center text-indigo-600 md:text-4xl">Trusted by several companies</h2>
         <div class="grid grid-cols-2 gap-8 text-gray-500 sm:gap-12 md:grid-cols-3 lg:grid-cols-6 dark:text-gray-400">
             <a href="#" class="flex justify-center items-center">
                 <svg class="h-9 hover:text-gray-900 dark:hover:text-white" viewBox="0 0 125 35" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -118,83 +200,6 @@
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M116.336 9.00154C114.284 9.00154 113.49 10.2101 113.303 11.2646H119.396C119.27 10.2379 118.508 9.00154 116.336 9.00154ZM108.5 12.897C108.5 8.67447 111.712 5.26007 116.336 5.26007C120.709 5.26007 123.892 8.42807 123.892 13.3781V14.4385H113.368C113.704 15.7335 114.929 16.8218 117.067 16.8218C118.108 16.8218 119.821 16.3686 120.681 15.5839L122.725 18.6317C121.26 19.9267 118.81 20.5633 116.55 20.5633C111.991 20.5633 108.5 17.6358 108.5 12.897Z" fill="currentColor"/>
                 </svg>                                                                                    
             </a>
-        </div>
-    </div>
-</section> --}}
-
-<section class="bg-gray-50 dark:bg-gray-800">
-    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-        <div class="max-w-screen-xl mb-8 lg:mb-16">
-            <h2 class="mb-4 text-4xl font-extrabold text-indigo-600">Designed to make events management easy</h2>
-            <p class="text-gray-500 sm:text-xl">Create a simple event website, set up custom registration processes, manage attendees, payments, tickets and badges.</p>
-        </div>
-        <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
-            <div class="shadow-md p-4 rounded-md bg-white">
-                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-indigo-100 lg:h-12 lg:w-12 dark:bg-indigo-900">
-                    <i class='bx bx-link-external bx-sm w-5 h-5 text-indigo-600 lg:w-6 lg:h-6'></i>
-                </div>
-                <h3 class="mb-2 text-xl font-bold text-indigo-600">Unique event URL</h3>
-                <p class="text-gray-500 dark:text-gray-400">Plan it, create it, launch it and get a unique URL for your event</p>
-            </div>
-            <div class="shadow-md p-4 rounded-md bg-white">
-                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-indigo-100 lg:h-12 lg:w-12">
-                    <i class='bx bxs-cog bx-sm w-5 h-5 text-indigo-600 lg:w-6 lg:h-6'></i>
-                </div>
-                <h3 class="mb-2 text-xl font-bold text-indigo-600">Intuitive Admin Interface</h3>
-                <p class="text-gray-500 dark:text-gray-400">Stay in charge of your events, tickets and attendees all in one place.</p>
-            </div>
-            <div class="shadow-md p-4 rounded-md bg-white">
-                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-indigo-100 lg:h-12 lg:w-12 dark:bg-indigo-900">
-                    <i class='bx bxs-credit-card bx-sm w-5 h-5 text-indigo-600 lg:w-6 lg:h-6'></i>                    
-                </div>
-                <h3 class="mb-2 text-xl font-bold text-indigo-600">Accept payments</h3>
-                <p class="text-gray-500 dark:text-gray-400">Need to collect payments? EMS allows you accept payments for tickets esaily.</p>
-            </div>
-            {{-- <div>
-                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
-                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path></svg>
-                </div>
-                <h3 class="mb-2 text-xl font-bold dark:text-white">Finance</h3>
-                <p class="text-gray-500 dark:text-gray-400">Audit-proof software built for critical financial operations like month-end close and quarterly budgeting.</p>
-            </div>
-            <div>
-                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
-                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
-                </div>
-                <h3 class="mb-2 text-xl font-bold dark:text-white">Enterprise Design</h3>
-                <p class="text-gray-500 dark:text-gray-400">Craft beautiful, delightful experiences for both marketing and product with real cross-company collaboration.</p>
-            </div>
-            <div>
-                <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
-                    <svg class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
-                </div>
-                <h3 class="mb-2 text-xl font-bold dark:text-white">Operations</h3>
-                <p class="text-gray-500 dark:text-gray-400">Keep your company’s lights on with customizable, iterative, and structured workflows built for all efficient teams and individual.</p>
-            </div> --}}
-        </div>
-    </div>
-</section>
-
-{{-- <section class="bg-white dark:bg-gray-900 dark:bg-gray-800">
-    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-        <div class="max-w-screen-xl text-gray-500 sm:text-lg dark:text-gray-400">
-            <h2 class="mb-4 text-4xl font-bold text-indigo-600">Powering innovation at <span class="font-extrabold">200,000+</span> companies worldwide</h2>
-            <p class="mb-4 font-light">Track work across the enterprise through an open, collaborative platform. Link issues across Jira and ingest data from other software development tools, so your IT support and operations teams have richer contextual information to rapidly respond to requests, incidents, and changes.</p>
-            <p class="mb-4 font-medium">Deliver great service experiences fast - without the complexity of traditional ITSM solutions.Accelerate critical development work, eliminate toil, and deploy changes with ease.</p>
-            <a href="#" class="inline-flex items-center font-medium text-blue-600 hover:text-blue-800 dark:text-blue-500 dark:hover:text-blue-700">
-                Learn more
-                <svg class="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-            </a>
-        </div>
-    </div>
-</section> --}}
-
-<section class="bg-white dark:bg-gray-900">
-    <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-        <div class="mx-auto max-w-screen-sm text-center">
-            <h2 class="mb-4 text-4xl font-extrabold leading-tight text-indigo-600">Ready to get started?</h2>
-            <p class="mb-6 font-light text-gray-500 md:text-lg">Create and manage events at no cost</p>
-            <a href="{{url('/dashboard')}}" class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Create Event now</a>
         </div>
     </div>
 </section>

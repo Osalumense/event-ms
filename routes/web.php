@@ -1,9 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\EventController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +20,27 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', [PageController::class, 'index']);
+Route::get('/about', [PageController::class, 'renderAboutPage']);
+Route::get('/faq', [PageController::class, 'renderFaqPage']);
+Route::get('/e/{slug}', [EventController::class, 'renderEventPage']);
+Route::get('/e/{slug}/register', [EventController::class, 'renderEventRegistrationPage']);
 
 Route::group(['middleware' => ['admin-auth']], function () {
     Route::get('/home', [PageController::class, 'renderHomePage']);
     Route::get('/dashboard', [PageController::class, 'renderOrganizerDashboard']);
     Route::group(['prefix' => 'events'], function () {
         Route::get('/', [PageController::class, 'renderEventDashboard']);
+        Route::get('/create', [PageController::class, 'renderCreateEventPage']);
+        Route::get('/{slug}', [PageController::class, 'renderEditEventPage']);
+        Route::delete('/delete/{id}', [PageController::class, 'deleteEvent']);
         Route::post('/', [PageController::class, 'saveEventDetails']);
+        Route::post('/publish/{id}', [PageController::class, 'publishEvent']);
+        Route::post('/update', [PageController::class, 'updateEvent']);
+    });
+
+    Route::group(['prefix' => 'tickets'], function () {
+        Route::post('/', [PageController::class, 'saveTicketDetails']);
+        Route::delete('/delete/{id}', [PageController::class, 'deleteTicket']);
     });
     
 });

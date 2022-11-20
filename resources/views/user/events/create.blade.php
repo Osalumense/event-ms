@@ -144,4 +144,15 @@
             console.error( error );
         });
 </script>
+<script>
+    $( document ).ready(function() {
+      $(".start_date, .end_date").flatpickr(
+          {
+              minDate: "today",
+              enableTime: true,
+              dateFormat: "Y-m-d H:i",
+          }
+      );
+    });
+</script>
 @endsection

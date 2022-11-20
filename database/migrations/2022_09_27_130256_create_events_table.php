@@ -16,6 +16,7 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->text('slug');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->text('description');
@@ -26,13 +27,14 @@ class CreateEventsTable extends Migration
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('location_address', 355)->nullable();
             $table->string('location_address_line_1', 355);
-            $table->string('location_address_line_2', 355);
+            $table->string('location_address_line_2', 355)->nullable();
             $table->string('location_country')->nullable();
             $table->string('location_country_code')->nullable();
             $table->string('location_state');
             $table->string('location_post_code');
             $table->string('location_street_number')->nullable();
             $table->text('post_order_display_message')->nullable();
+            $table->tinyInteger('is_active')->default(0);
             // $table->unsignedInteger('currency_id')->nullable();
             // $table->foreign('currency_id')->references('id')->on('currencies');
             $table->softDeletes();

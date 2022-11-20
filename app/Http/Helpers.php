@@ -2,7 +2,9 @@
 
 use Vinkla\Hashids\Facades\Hashids;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
 /**
  * Get Decoded ID
  *
@@ -17,7 +19,6 @@ function getDecodedId($encodedId)
     if ($decodedArray) {
         $id = $decodedArray[0];
     }
-
     return $id;
 }
 
@@ -34,4 +35,17 @@ function getCounsellors()
     ->orderBy('id', 'DESC')->get();
 
     return $counsellors;
+}
+
+function deleteFile($path)
+{
+    try {        
+        if (File::exists($path)) {
+            File::delete($path);
+            return true;
+        }
+    } catch (\Exception $exception) {
+        Log::error("Method :: deleteFile :: " . $exception->getMessage());
+    }
+    return false;
 }

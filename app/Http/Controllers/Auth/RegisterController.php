@@ -71,7 +71,6 @@ class RegisterController extends Controller
         $newAccount = $account->getAccountByEmail($data['email']);
         $accountId = $newAccount->id;
 
-
         $user = User::create([
             'account_id' => $accountId,
             'first_name' => $data['first_name'],
@@ -79,5 +78,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password'])         
         ]);
+        return $user;
     }
 }

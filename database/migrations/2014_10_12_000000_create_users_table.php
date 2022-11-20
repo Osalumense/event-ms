@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
     
             $table->boolean('is_active')->default(false);
             $table->boolean('is_banned')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
 

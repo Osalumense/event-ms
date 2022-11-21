@@ -47,6 +47,14 @@ class Tickets extends Model
         ])->orderBy('id', 'DESC')->get()->toArray();
     }
 
+    public static function getEventTicketsByEventIdAndUserId($eventId, $userId)
+    {
+        return Tickets::where([
+            'event_id' => $eventId,
+            'user_id' => $userId,
+        ])->orderBy('id', 'DESC')->get()->toArray();
+    }
+
     public function rules()
     {
         return [
@@ -66,5 +74,6 @@ class Tickets extends Model
         $this->forceFill($postData);
         $this->save();
     }
+
 
 }

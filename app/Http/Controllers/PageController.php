@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
-    //
-        /**
+    /**
      * Render Index page
      * 
      * @return \Illuminate\Contracts\Support\Renderable
@@ -90,7 +89,7 @@ class PageController extends Controller
     {
         $event = Events::getEventBySlug($slug);
         $eventId = $event[0]['id'];
-        $ticket = Tickets::getEventTickets($eventId); 
+        $ticket = Tickets::getEventTickets($eventId);
         // dd($ticket);       
         return view('user.events.events')->with([
             'event' => $event[0],
@@ -228,6 +227,44 @@ class PageController extends Controller
             return response()->json([
                 'code' => 400,
                 'msg' => 'An error occured! please try again'
+            ]);
+        }
+    }
+
+    public function getTicketDetails(Request $request)
+    {
+        $id = $request->segment(3);
+        $ticket = Tickets::get($id);
+        logger('Id >>> ' . $id . 'ticket >> ' . $ticket);
+        return response()->json([
+            'ticket' => $ticket
+        ]);
+    }
+
+    /**
+     * Update a ticket
+     */
+    public function updateTicket(Request $request)
+    {
+        $id = $request->input('id');
+        $ticket = Tickets::get($id);
+        $validation = Validator::make($request->all(), [
+            'title' => 'required|max:255|string',
+            'price' => 'required|numeric',
+            'quantity_available' => 'required|numeric',
+        ]);
+        if ($validation->fails()) {
+            return response()->json([
+                'code' => 400,
+                'msg' =>  $validation->errors()->first()
+            ]);
+        }
+        else {
+            $ticket = Tickets::get($id);
+            $ticket->edit();
+            return response()->json([
+                'code' => 200,
+                'msg' => 'Ticket updated successfully'
             ]);
         }
     }

@@ -37,64 +37,63 @@
 
 <div class="flex flex-wrap">
     @foreach ($userEvents as $userEvents)
-        <div class="w-full md:w-1/2 lg:w-1/3 p-5 my-2">
-            {{-- <div class="py-6 px-3"> --}}
-            <div class="bg-white transition-shadow shadow-lg hover:shadow-xl rounded-lg overflow-hidden">
-                {{-- <a href="{{url('/events/').'/'.$userEvents['slug']}}"> --}}
-                    <div class="bg-cover bg-center h-56 p-4"
-                    style="background-image: 
-                    @if($userEvents['bg_image_path'])
-                        url('/images/events/{{$userEvents['bg_image_path']}}')
-                    @else
-                        url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)
-                    @endif
-                    ">
-                        <div class="flex justify-end">
-                            @if($userEvents['is_active'] == 0)
-                                <i class='bx bxs-circle text-red-600 bx-sm'></i>
-                            @else
-                                <a class="text-green-600 flex items-center" target="_blank" href="{{url('/e/').'/'.$userEvents['slug']}}">View<i class='bx bx-link-external inline-flex items-center'></i></a>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <p class="uppercase tracking-wide text-lg font-bold text-gray-700">{{$userEvents['title']}} </p>
-                        <div class="h-12 overflow-hidden text-ellipsis">
-                            <p class="text-gray-700">{!!$userEvents['description']!!}</p>
-                        </div>                        
-                    </div>
-                    <div class="flex justify-between items-center p-4 border-t border-gray-300 text-gray-700">
-                        <div class="flex-1 inline-flex items-end">
-                            <span class="mr-2">
-                                <i class='bx bxs-barcode bx-sm' ></i>
-                            </span>
-                            <p><span class="text-gray-900 text-lg font-bold"></span>0 Tickets</p>
-                        </div>
-                        <div class="items-center">
-                            @if($userEvents['is_active'] == 0)
-                                <button class="text-indigo-400 rounded-md border-2 border-indigo-400 button px-2 py-1 publish_event" id="{{$userEvents['id']}}">Publish now</button>
-                            @else
-                                <p class="text-green-400 rounded-md bg-green-100 px-2 py-1">Live</p>
-                            @endif
-                            
-                        </div>
-                    </div>
-                    <div class="px-4 pt-3 pb-4 border-t border-gray-300 bg-gray-100">
-                        <div class="text-xs uppercase font-bold text-gray-600 tracking-wide"> Hosted by {{ Auth::user()->first_name}}</div>
-                        <div class="flex items-center pt-2">
-                            <div>
-                                <p class="font-bold text-gray-900">{{$userEvents['location_address']}}</p>
-                                <p class="text-sm text-gray-700 flex items-center"><span><i class='bx bxs-map mr-1'></i></span> {{$userEvents['location_address_line_1']}}, {{$userEvents['location_state']}}</p>
+        <a href="{{url('/events/').'/'.$userEvents['slug']}}">
+            <div class="w-full md:w-1/2 lg:w-1/3 p-5 my-2">
+                <div class="bg-white transition-shadow shadow-lg hover:shadow-xl rounded-lg overflow-hidden">
+                        <div class="bg-cover bg-center h-56 p-4"
+                        style="background-image: 
+                        @if($userEvents['bg_image_path'])
+                            url('/images/events/{{$userEvents['bg_image_path']}}')
+                        @else
+                            url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)
+                        @endif
+                        ">
+                            <div class="flex justify-end">
+                                @if($userEvents['is_active'] == 0)
+                                    <i class='bx bxs-circle text-red-600 bx-sm'></i>
+                                @else
+                                    <a class="text-green-600 flex items-center" target="_blank" href="{{url('/e/').'/'.$userEvents['slug']}}">View<i class='bx bx-link-external inline-flex items-center'></i></a>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="flex items-center justify-end w-full my-3">
-                        <a href="{{url('/events/').'/'.$userEvents['slug']}}" class="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 mr-3 bg-indigo-600 transition duration-150 text-white ease-in-out hover:border-indigo-700 hover:bg-indigo-700 border rounded px-8 py-2 text-sm">View</a>
-                        <button class="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-600 mr-3 bg-red-600 transition duration-150 text-white ease-in-out hover:border-red-700 hover:bg-red-700 border rounded px-8 py-2 text-sm delete_event" id="{{$userEvents['id']}}">Delete</button>
-                    </div>
-                {{-- </a> --}}
+                        <div class="p-4">
+                            <p class="uppercase tracking-wide text-lg font-bold text-gray-700">{{$userEvents['title']}} </p>
+                            <div class="h-12 overflow-hidden text-ellipsis">
+                                <p class="text-gray-700">{!!$userEvents['description']!!}</p>
+                            </div>                        
+                        </div>
+                        <div class="flex justify-between items-center p-4 border-t border-gray-300 text-gray-700">
+                            <div class="flex-1 inline-flex items-end">
+                                <span class="mr-2">
+                                    <i class='bx bxs-barcode bx-sm' ></i>
+                                </span>
+                                <p><span class="text-gray-900 text-lg font-bold"></span>0 Tickets</p>
+                            </div>
+                            <div class="items-center">
+                                @if($userEvents['is_active'] == 0)
+                                    <button class="text-indigo-400 rounded-md border-2 border-indigo-400 button px-2 py-1 publish_event" id="{{$userEvents['id']}}">Publish now</button>
+                                @else
+                                    <p class="text-green-400 rounded-md bg-green-100 px-2 py-1">Live</p>
+                                @endif
+                                
+                            </div>
+                        </div>
+                        <div class="px-4 pt-3 pb-4 border-t border-gray-300 bg-gray-100">
+                            <div class="text-xs uppercase font-bold text-gray-600 tracking-wide"> Hosted by {{ Auth::user()->first_name}}</div>
+                            <div class="flex items-center pt-2">
+                                <div>
+                                    <p class="font-bold text-gray-900">{{$userEvents['location_address']}}</p>
+                                    <p class="text-sm text-gray-700 flex items-center"><span><i class='bx bxs-map mr-1'></i></span> {{$userEvents['location_address_line_1']}}, {{$userEvents['location_state']}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-end w-full my-3">
+                            <a href="{{url('/events/').'/'.$userEvents['slug']}}" class="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 mr-3 bg-indigo-600 transition duration-150 text-white ease-in-out hover:border-indigo-700 hover:bg-indigo-700 border rounded px-8 py-2 text-sm">View</a>
+                            <button class="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-600 mr-3 bg-red-600 transition duration-150 text-white ease-in-out hover:border-red-700 hover:bg-red-700 border rounded px-8 py-2 text-sm delete_event" id="{{$userEvents['id']}}">Delete</button>
+                        </div>
+                </div>
             </div>
-        </div>
+        </a>
     @endforeach
 </div>
 

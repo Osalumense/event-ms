@@ -112,13 +112,14 @@
             }
         );
         $('.create_ticket').on('click', function() {
-                console.log('We are set');
                 $('.create_ticket_form').removeClass('hidden');
-                $('.ticket_div').addClass('hidden');  
+                $('.ticket_div').addClass('hidden');
+                $('.update_ticket_form').addClass('hidden');
         });
         $('.close_ticket_form').on('click', function() {
                 $('.ticket_div').removeClass('hidden');
-                $('.create_ticket_form').addClass('hidden'); 
+                $('.create_ticket_form').addClass('hidden');
+                $('.update_ticket_form').addClass('hidden');
         });
 
         $('#create_ticket').on('click', function() {
@@ -161,47 +162,98 @@
         });
 
         $('.delete_ticket').on('click', function() {
-        id = $(this).attr('id');
-        Swal.fire({
-            title: 'Are you sure you want to delete this ticket? This action can\'t be reversed',
-            icon: 'warning',
-            showCancelButton: true,
-            iconColor: '#4f46e5',
-            confirmButtonColor: '#4f46e5',
-            cancelButtonColor: '#e11d48',
-            confirmButtonText: 'Yes, delete ticket'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url : '/tickets/delete/'+id,
-                    type : 'DELETE',
-                    data : {
-                        _token: '{!! csrf_token() !!}',
-                    },
-                    success: function(response) {
-                        if(response.code == 200) {
-                            Swal.fire({
-                                    icon: 'success',
-                                    title: response.msg,
-                                    iconColor: '#4f46e5',
+            id = $(this).attr('id');
+            Swal.fire({
+                title: 'Are you sure you want to delete this ticket? This action can\'t be reversed',
+                icon: 'warning',
+                showCancelButton: true,
+                iconColor: '#4f46e5',
+                confirmButtonColor: '#4f46e5',
+                cancelButtonColor: '#e11d48',
+                confirmButtonText: 'Yes, delete ticket'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url : '/tickets/delete/'+id,
+                        type : 'DELETE',
+                        data : {
+                            _token: '{!! csrf_token() !!}',
+                        },
+                        success: function(response) {
+                            if(response.code == 200) {
+                                Swal.fire({
+                                        icon: 'success',
+                                        title: response.msg,
+                                        iconColor: '#4f46e5',
+                                        confirmButtonColor: '#4f46e5'
+                                }).then((result) =>{
+                                        window.location.reload()
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: response.msg,
                                     confirmButtonColor: '#4f46e5'
-                            }).then((result) =>{
-                                    window.location.reload()
-                            });
+                                });
+                            }
                         }
-                        else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error!',
-                                text: response.msg,
+                    });
+                }
+            })
+        });
+        $('.update_ticket').on('click', function() {
+            $('.create_ticket_form').addClass('hidden');
+            $('.ticket_div').addClass('hidden');
+            $('.update_ticket_form').removeClass('hidden');
+            $('.update_ticket_form').focus();
+            let id = $(this).attr('id')
+            $.ajax({
+                url : '/tickets/edit/'+id,
+                dataType : 'json',
+                success : function (response) {
+                    $('#edit_ticket_id').val(response.ticket.id);
+                    $('#edit_ticket_title').val(response.ticket.title);
+                    $('#edit_ticket_amount').val(response.ticket.price);
+                    $('#edit_ticket_quantity').val(response.ticket.quantity_available);
+                }
+            });
+        });
+        $('#update_ticket_btn').on('click', function() {
+            $.ajax({
+                url : '/tickets/update',
+                data: {
+                    '_token': $('#token').val(),
+                    'id': $('#edit_ticket_id').val(),
+                    'title': $('#edit_ticket_title').val(),
+                    'price': $('#edit_ticket_amount').val(),
+                    'quantity_available': $('#edit_ticket_quantity').val()
+                },
+                dataType : 'json',
+                method: 'POST',
+                success : function (response) {
+                    if(response.code == 200) {
+                        Swal.fire({
+                                icon: 'success',
+                                title: response.msg,
+                                iconColor: '#4f46e5',
                                 confirmButtonColor: '#4f46e5'
-                            });
-                        }
+                        }).then((result) =>{
+                                window.location.reload()
+                        });
                     }
-                });
-            }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: response.msg,
+                            confirmButtonColor: '#4f46e5'
+                        });
+                    }
+                }
+            });
         })
-    });
         
         });
 

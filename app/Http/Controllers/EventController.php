@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Events;
 use App\Models\User;
+use App\Models\Tickets;
 
 class EventController extends Controller
 {
@@ -34,13 +35,15 @@ class EventController extends Controller
     {
         $getEvent = Events::getActiveEventBySlug($slug);
         $event = count($getEvent) > 0 ? $getEvent[0] : [];
+        $ticket = Tickets::getEventTicketsByEventIdAndUserId($event['id'], $event['account_id']);
         if(count($event) > 1){
             $getUser = User::get($event['user_id']);
         };
         $user = count($getEvent) > 0 ? $getUser : [];
         return view('user.events.register')->with([
             'event' => $event,
-            'user' => $user
+            'user' => $user,
+            'ticket' => $ticket
         ]);
     }
 }

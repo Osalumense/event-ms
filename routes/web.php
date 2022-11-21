@@ -40,6 +40,8 @@ Route::group(['middleware' => ['admin-auth']], function () {
 
     Route::group(['prefix' => 'tickets'], function () {
         Route::post('/', [PageController::class, 'saveTicketDetails']);
+        Route::get('/edit/{id}', [PageController::class, 'getTicketDetails']);
+        Route::post('/update', [PageController::class, 'updateTicket']);
         Route::delete('/delete/{id}', [PageController::class, 'deleteTicket']);
     });
     

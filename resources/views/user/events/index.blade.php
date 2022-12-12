@@ -67,16 +67,18 @@
                                 <span class="mr-2">
                                     <i class='bx bxs-barcode bx-sm' ></i>
                                 </span>
-                                <p><span class="text-gray-900 text-lg font-bold"></span>0 Tickets</p>
+                                <p><span class="text-gray-900 text-lg font-bold"></span>{{$userEvents->ticket->count()}} Tickets</p>
                             </div>
                             <div class="items-center">
                                 @if($userEvents['is_active'] == 0)
                                     <button class="text-indigo-400 rounded-md border-2 border-indigo-400 button px-2 py-1 publish_event" id="{{$userEvents['id']}}">Publish now</button>
                                 @else
                                     <p class="text-green-400 rounded-md bg-green-100 px-2 py-1">Live</p>
-                                @endif
-                                
+                                @endif   
                             </div>
+                        </div>
+                        <div class="p-4 border-t border-gray-300 text-gray-700">
+                            <p><span class="text-gray-900 text-lg font-bold"></span>{{$userEvents->attendees->count()}} Attendees</p>
                         </div>
                         <div class="px-4 pt-3 pb-4 border-t border-gray-300 bg-gray-100">
                             <div class="text-xs uppercase font-bold text-gray-600 tracking-wide"> Hosted by {{ Auth::user()->first_name}}</div>

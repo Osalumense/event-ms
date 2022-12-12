@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Events;
 use App\Models\User;
 use App\Models\Tickets;
+use App\Models\Attendees;
 
 class EventController extends Controller
 {
@@ -45,5 +48,18 @@ class EventController extends Controller
             'user' => $user,
             'ticket' => $ticket
         ]);
+    }
+
+    public function registerAttendee(Request $request)
+    {
+        $attendee = new Attendees();
+        $validation = Validator::make($request->all(), $attendee->rules());
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation)->withInput();
+        }
+        else {
+            $attendee->edit();
+            return redirect()->back()->with('success', 'you have successfully registered for this event');
+        }
     }
 }

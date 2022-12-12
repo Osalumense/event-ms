@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendees;
 use App\Models\Events;
 use App\Models\Tickets;
 use App\Models\User;
@@ -48,7 +49,7 @@ class PageController extends Controller
 
     public function renderEventDashboard()
     {
-        $events = Events::getUserEvents();
+        $events = Events::where('user_id', Auth::user()->id)->get();
         return view('user.events.index')->with([
             'userEvents' => $events
         ]);
@@ -84,16 +85,19 @@ class PageController extends Controller
     }
 
     // public function getEventDetails
-
     public function renderEditEventPage($slug)
     {
-        $event = Events::getEventBySlug($slug);
+        $event = Events::where('slug', $slug)->get();
         $eventId = $event[0]['id'];
-        $ticket = Tickets::getEventTickets($eventId);
-        // dd($ticket);       
+        $ticket = Tickets::where('event_id', $eventId)->get();
+        $checked_in_attendees = Attendees::where([
+            ['event_id', $eventId],
+            ['checked_in', '=', 1],
+        ])->count();      
         return view('user.events.events')->with([
             'event' => $event[0],
             'ticket' => $ticket,
+            'checked_in_attendees' => $checked_in_attendees
         ]);
     }
 
@@ -235,7 +239,6 @@ class PageController extends Controller
     {
         $id = $request->segment(3);
         $ticket = Tickets::get($id);
-        logger('Id >>> ' . $id . 'ticket >> ' . $ticket);
         return response()->json([
             'ticket' => $ticket
         ]);
@@ -268,4 +271,6 @@ class PageController extends Controller
             ]);
         }
     }
+
+    
 }

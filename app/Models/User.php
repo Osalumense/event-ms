@@ -61,6 +61,11 @@ class User extends Authenticatable
     {
         return User::find($id);
     }
+
+    public function events()
+    {
+        return $this->hasMany(Events::class, 'account_id', 'id');
+    }
     
     /**
      * Add/update user.

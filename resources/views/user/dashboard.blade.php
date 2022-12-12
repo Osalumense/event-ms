@@ -100,10 +100,12 @@
                 <h4 class="text-lg font-semibold  mb-3">Recently created events</h4>
                 <hr/>
                 @foreach ($recently_added_events as $recent_events)
-                <div class="flex justify-between py-3">
-                    <p>{{$recent_events['title']}}</p>
-                    <span class="bg-indigo-50 text-indigo-700 p-2 rounded-full">{{$recent_events['start_date']}}</span>
-                </div>
+                <a href="{{url('/events/').'/'.$recent_events['slug']}}">
+                    <div class="flex justify-between py-3">
+                        <p>{{$recent_events['title']}}</p>
+                        <span class="text-indigo-700 p-2">{{date('D, d-M-Y h:i:s', strtotime($recent_events['start_date']))}}</span>
+                    </div>
+                </a>
                 <hr/>
                 @endforeach
             </div>

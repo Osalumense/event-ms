@@ -36,6 +36,16 @@ class Events extends Model
         'start_date' => 'datetime',
         'end_date' => 'datetime',
     ];
+    
+    public function ticket()
+    {
+        return $this->hasMany(Tickets::class, 'event_id', 'id');
+    }
+
+    public function attendees()
+    {
+        return $this->hasMany(Attendees::class, 'event_id', 'id');
+    }
 
     public static function get($id)
     {
@@ -114,7 +124,6 @@ class Events extends Model
                 $image->move('images/events/', $filename);
                 $event->save();
             }
-            
         }
     }
 

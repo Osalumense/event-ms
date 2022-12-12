@@ -28,6 +28,11 @@ class Tickets extends Model
         'end_date' => 'datetime',
     ];
 
+    public function event()
+    {
+        return $this->belongsTo(Events::class, 'id', 'event_id');
+    }
+
     public static function get($id)
     {
         return Tickets::find($id);
@@ -73,6 +78,11 @@ class Tickets extends Model
         $postData['account_id'] = Auth::user()->account_id;
         $this->forceFill($postData);
         $this->save();
+    }
+
+    public static function getTicketsCountByEventId($id)
+    {
+        return Tickets::where('event_id', $id)->count();
     }
 
 

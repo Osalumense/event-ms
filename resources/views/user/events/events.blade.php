@@ -42,15 +42,99 @@
                             @include('user.events.partials.tickets.tickets', array( "ticket" => $ticket))  
                         </div>
                         <div class="hidden" id="tab-attendees">
-                            <p>
-                                Efficiently unleash cross-media information without
-                                cross-media value. Quickly maximize timely deliverables for
-                                real-time schemas.
-                                <br />
-                                <br />
-                                Dramatically maintain clicks-and-mortar solutions
-                                without functional solutions.
-                            </p>
+                            <p class="font-semibold text-base text-blueGray-700 mb-4">Total attendees: {{$event->attendees->count()}} / Checked in attendees: {{$checked_in_attendees}}</p>
+                            <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                                <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                                    <table class="min-w-full leading-normal">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                    User
+                                                </th>
+                                                <th
+                                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                    Email
+                                                </th>
+                                                <th
+                                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                    Date Registered
+                                                </th>
+                                                <th
+                                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                    Price
+                                                </th>
+                                                <th
+                                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                    Status
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($event->attendees as $attendees)
+                                                <tr>
+                                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                        <div class="flex items-center">
+                                                            <p class="text-gray-900 whitespace-no-wrap">
+                                                                {{$attendees->first_name}} {{$attendees->last_name}}
+                                                            </p>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                        <p class="text-gray-900 whitespace-no-wrap">{{$attendees->email}}</p>
+                                                    </td>
+                                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                        <p class="text-gray-900 whitespace-no-wrap">
+                                                            {{date('d-M-Y', strtotime($attendees->created_at))}}
+                                                        </p>
+                                                    </td>
+                                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                        <p class="text-gray-900 whitespace-no-wrap">
+                                                            {{$attendees->amount}}
+                                                        </p>
+                                                    </td>
+                                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                        @if ($attendees->checked_in == 1)
+                                                            <span
+                                                            class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                                                <span aria-hidden
+                                                                    class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative"><i class='bx bxs-user mr-1'></i>Checked in</span>
+                                                            </span>
+                                                        @else
+                                                            <span
+                                                            class="relative inline-block px-3 py-1 font-semibold text-indigo-900 leading-tight">
+                                                                <span aria-hidden
+                                                                    class="absolute inset-0 bg-indigo-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative"><i class='bx bxs-user mr-1'></i>Registered</span>
+                                                            </span>
+                                                        @endif
+                                                        
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    {{-- <div
+                                        class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
+                                        <span class="text-xs xs:text-sm text-gray-900">
+                                            Showing 1 to 4 of 50 Entries
+                                        </span>
+                                        <div class="inline-flex mt-2 xs:mt-0">
+                                            <button
+                                                class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l">
+                                                Prev
+                                            </button>
+                                            <button
+                                                class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
+                                                Next
+                                            </button>
+                                        </div>
+                                    </div> --}}
+                                </div>
+                            </div>
+                           
+                            {{-- {{$event->attendees}} --}}
                         </div>
                     </div>
                     </div>
@@ -112,14 +196,14 @@
             }
         );
         $('.create_ticket').on('click', function() {
-                $('.create_ticket_form').removeClass('hidden');
-                $('.ticket_div').addClass('hidden');
-                $('.update_ticket_form').addClass('hidden');
+            $('.create_ticket_form').removeClass('hidden');
+            $('.ticket_div').addClass('hidden');
+            $('.update_ticket_form').addClass('hidden');
         });
         $('.close_ticket_form').on('click', function() {
-                $('.ticket_div').removeClass('hidden');
-                $('.create_ticket_form').addClass('hidden');
-                $('.update_ticket_form').addClass('hidden');
+            $('.ticket_div').removeClass('hidden');
+            $('.create_ticket_form').addClass('hidden');
+            $('.update_ticket_form').addClass('hidden');
         });
 
         $('#create_ticket').on('click', function() {

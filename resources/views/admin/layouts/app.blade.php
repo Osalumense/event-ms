@@ -88,7 +88,11 @@
                   <!-- avatar button -->
                   <div class="relative" x-data="{ isOpen: false }">
                     <button @click="isOpen = !isOpen" class="">
-                      <i class='bx bxs-user-circle bx-lg bx-tada-hover'></i>
+                      <p class="rounded-full bg-gray-200 p-2">
+                        <span class="text-gray-900 font-bold">
+                          {!! \Illuminate\Support\Str::substr(Auth::user()->last_name, 0, 1) . \Illuminate\Support\Str::substr(Auth::user()->first_name, 0, 1) !!}
+                        </span>
+                      </p>
                     </button>
                    
     

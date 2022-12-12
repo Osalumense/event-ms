@@ -24,6 +24,8 @@ Route::get('/about', [PageController::class, 'renderAboutPage']);
 Route::get('/faq', [PageController::class, 'renderFaqPage']);
 Route::get('/e/{slug}', [EventController::class, 'renderEventPage']);
 Route::get('/e/{slug}/register', [EventController::class, 'renderEventRegistrationPage']);
+Route::post('/event/attendees', [EventController::class, 'registerAttendee']);
+Route::get('/tickets/get/{id}', [PageController::class, 'getTicketDetails']);
 
 Route::group(['middleware' => ['admin-auth']], function () {
     Route::get('/home', [PageController::class, 'renderHomePage']);
@@ -38,12 +40,17 @@ Route::group(['middleware' => ['admin-auth']], function () {
         Route::post('/update', [PageController::class, 'updateEvent']);
     });
 
+    Route::group(['prefix' => 'attendees'], function () {
+        Route::get('/', [PageController::class, 'getAttendees']);
+    });
+
     Route::group(['prefix' => 'tickets'], function () {
         Route::post('/', [PageController::class, 'saveTicketDetails']);
-        Route::get('/edit/{id}', [PageController::class, 'getTicketDetails']);
+        Route::get('/edit/{id}', [PageController::class, 'getTicketDetails']);  
         Route::post('/update', [PageController::class, 'updateTicket']);
         Route::delete('/delete/{id}', [PageController::class, 'deleteTicket']);
     });
+
     
 });
 

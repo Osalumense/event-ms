@@ -31,21 +31,21 @@
                         @endif
                         class="absolute inset-0 object-cover w-full h-full" alt="" />                 
                     <div class="relative bg-gray-900 bg-opacity-75">
-                    <div class="px-4 py-16 mx-auto lg:px-8 lg:py-20">
-                        <div class="flex flex-col items-center justify-center mx-auto text-center">
-                        <div class="w-full mb-12">
-                            <h2 class="mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl sm:leading-none uppercase">
-                                {{$event['title']}}
-                            </h2>
-                            <div class="border-t-4 border-white w-24 mx-auto my-4 mb-12"></div>
-                            @if ( \Carbon\Carbon::now() > $event['end_date'] )
-                                <button type="button" class="px-6 mt-8 py-2 bg-gray-400 outline-none border-2 border-indigo-600 rounded text-indigo-600 font-medium active:scale-95 focus:bg-indigo-700 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2 transition-colors duration-200 cursor-not-allowed" disabled>Registration closed</button>
-                            @else
-                                <a href="{{url('/e/').'/'.$event['slug']}}/register" class="px-6 mt-8 py-2 bg-transparent outline-none border-2 border-indigo-600 rounded text-indigo-600 font-medium active:scale-95 hover:bg-indigo-700 hover:text-white hover:border-transparent focus:bg-indigo-700 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2 transition-colors duration-200">Register</a>
-                            @endif
+                        <div class="px-4 py-16 mx-auto lg:px-8 lg:py-20">
+                            <div class="flex flex-col items-center justify-center mx-auto text-center">
+                                <div class="w-full mb-12">
+                                    <h2 class="mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl sm:leading-none uppercase">
+                                        {{$event['title']}}
+                                    </h2>
+                                    <div class="border-t-4 border-white w-24 mx-auto my-4 mb-12"></div>
+                                    @if ( \Carbon\Carbon::now() > $event['start_date'] )
+                                        <button type="button" class="px-6 mt-8 py-2 bg-gray-400 outline-none border-2 border-indigo-600 rounded text-indigo-600 font-medium active:scale-95 focus:bg-indigo-700 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2 transition-colors duration-200 cursor-not-allowed" disabled>Registration closed</button>
+                                    @else
+                                        <a href="{{url('/e/').'/'.$event['slug']}}/register" class="px-6 mt-8 py-2 bg-transparent outline-none border-2 border-indigo-600 rounded text-indigo-600 font-medium active:scale-95 hover:bg-indigo-700 hover:text-white hover:border-transparent focus:bg-indigo-700 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2 transition-colors duration-200">Register</a>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
                 <section class="relative block h-500-px">
@@ -89,7 +89,7 @@
                                     
                                 </div>
                                 <div class="mt-6 flex justify-center border-t-2 border-gray-200">
-                                    @if ( \Carbon\Carbon::now() > $event['end_date'] )
+                                    @if ( \Carbon\Carbon::now() > $event['start_date'] )
                                         <button type="button" class="px-6 mt-5 py-2 bg-gray-300 outline-none border-2 border-indigo-400 rounded text-indigo-500 font-medium active:scale-95 focus:bg-indigo-600 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 cursor-not-allowed transition-colors duration-200" disabled>Registration closed</button>
                                     @else
                                         <a href="{{url('/e/').'/'.$event['slug']}}/register" class="px-6 mt-5 py-2 bg-transparent outline-none border-2 border-indigo-400 rounded text-indigo-500 font-medium active:scale-95 hover:bg-indigo-600 hover:text-white hover:border-transparent focus:bg-indigo-600 focus:text-white focus:border-transparent focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 disabled:bg-gray-400/80 disabled:shadow-none disabled:cursor-not-allowed transition-colors duration-200">Register</a>

@@ -95,9 +95,6 @@
                                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 hidden">
-                                                        id
-                                                    </th>
                                                     <th scope="col" class="px-6 py-3">
                                                         Ticket
                                                     </th>
@@ -112,14 +109,12 @@
                                             <tbody>
                                                 @foreach ($ticket as $ticket)
                                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                                        <td class="px-6 py-4 hidden">
-                                                            {{$ticket['id']}}
-                                                        </td>
-                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap ticket">
                                                             {{$ticket['title']}}
                                                         </th>
                                                         <td class="px-6 py-4">
                                                             {{$ticket['price']}}
+                                                            <input class="hiddenId" value="{{$ticket['id']}}">
                                                         </td>
                                                         <td class="px-6 py-4">
                                                             <div class="qty">
@@ -141,7 +136,10 @@
                                     <div class="w-full lg:w-1/3 bg-gray-100 flex flex-col lg:px-8 md:px-7 px-4 py-6 justify-between overflow-y-auto">
                                         <div>
                                             <p class="lg:text-3xl text-2xl font-bold leading-9 text-gray-800 dark:text-white">Summary</p>
-                                            <div class="flex items-center justify-between pt-16">
+                                            <div class="flex items-center justify-between pt-16 cart-summary">
+
+                                            </div>
+                                            <div class="flex items-center justify-between pt-5">
                                               <p class="text-base leading-none text-gray-800 dark:text-white">Subtotal:</p>
                                               <p class="text-base leading-none text-gray-800 dark:text-white" id="subtotal_div"></p>
                                             </div>
@@ -522,22 +520,33 @@
 
     <script>
         $('.qty button').on('click', function () {
-            let $button = $(this);
-            let oldValue = $button.parent().find('input').val();
+            var $button = $(this);
+            var oldValue = $button.parent().find('input').val();
             if ($button.hasClass('btn-plus')) {
-                let newVal = parseFloat(oldValue) + 1;
+                var newVal = parseFloat(oldValue) + 1;
             } else {
                 if (oldValue >= 0) {
                     if (oldValue == 0) {
-                        let newVal = 0;
+                        var newVal = 0;
                     } else {
-                        let newVal = parseFloat(oldValue) - 1;
+                        var newVal = parseFloat(oldValue) - 1;
                     }
                 } else {
                     newVal = 0;
                 }
             }
             $button.parent().find('input').val(newVal);
+        });
+
+        $(".incDecQty").on('click', function() {
+            let thisRow = $(this).closest("tr");
+            let id = thisRow.find(".hiddenId").val();
+            let ticket = thisRow.find(".ticket").text();
+            let qty = thisRow.find("#updateQty").val();
+            console.log('id', id, 'qty', qty, 'ticket', ticket)
+
+            $('.cart-summary').append('<span>'+ticket+'</span>');
+            
         });
 
 

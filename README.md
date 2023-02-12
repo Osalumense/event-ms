@@ -6,7 +6,7 @@ It is still a work in progress...
 
 ## Screenshot
    Homepage
-   [homepage](https://user-images.githubusercontent.com/43953425/218332154-bb18af6d-f790-4507-af3e-6d1aef59cdd9.png)
+   https://user-images.githubusercontent.com/43953425/218332154-bb18af6d-f790-4507-af3e-6d1aef59cdd9.png
    
    
    User create event page

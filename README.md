@@ -6,14 +6,13 @@ It is still a work in progress...
 
 ## Screenshot
    Homepage
-   https://user-images.githubusercontent.com/43953425/218332154-bb18af6d-f790-4507-af3e-6d1aef59cdd9.png
-   
+   ![Homepage](https://user-images.githubusercontent.com/43953425/218332154-bb18af6d-f790-4507-af3e-6d1aef59cdd9.png)
    
    User create event page
-   [Created event registration page](https://user-images.githubusercontent.com/43953425/218332160-fab736bc-0162-4e7a-acaf-7c86c6d5baa9.png)
+   ![Created event registration page](https://user-images.githubusercontent.com/43953425/218332160-fab736bc-0162-4e7a-acaf-7c86c6d5baa9.png)
     
    Events registration
-   [create event](https://user-images.githubusercontent.com/43953425/218332162-7c21cb2a-a05b-475a-a9a1-6dd2f7ad3fa5.png)
+   ![create event](https://user-images.githubusercontent.com/43953425/218332162-7c21cb2a-a05b-475a-a9a1-6dd2f7ad3fa5.png)
 
 
 ## Steps to run in local machine

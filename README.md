@@ -1,10 +1,22 @@
-# EMS
+# EventMS
 
-## Description
-An event management system to enable users create events, sell tickets to the events and manage event attendees in real time.
-It is still a work in progress...
+## Overview
+Event MS is a powerful and flexible web application built with Laravel and Tailwind CSS. It simplifies the process of organizing events, whether they are paid or free, by providing a seamless registration and check-in experience for participants.
+* Note: It's still a work in progress. So, use with caution. Thank you!
 
-## Steps to run in local machine
+## Features
+- Create Events: Easily set up new events with details such as date, time, venue, and pricing.
+
+- Registration: Allow users to register for events with a simple and intuitive registration form.
+
+- Barcode Generation: Automatically generate unique barcodes for participants upon registration.
+
+- Efficient Check-in: Streamline event management by scanning barcodes for quick and accurate participant check-in.
+
+- Responsive Design: The application is designed to work seamlessly on various devices, ensuring a smooth user experience
+
+
+## Setup GUide
 - Clone the repository
 - cd into project directory
 - Copy .env.example to .env
@@ -12,14 +24,11 @@ It is still a work in progress...
 - Run ```npm install``` to install npm dependencies
 - Run ```php artisan key:generate``` to generate application key
 - Run ```php artisan migrate``` to create all tables
-- Run ```php artisan db:seed --class=CreateAdminSeeder``` to seed the database with the default login details for admin, counsellor and user
+- Run ```php artisan db:seed --class=CreateAdminSeeder``` to seed the database with the default login details for admin
 - Run ```php artisan serve``` to serve up the application
 - The application can then be viewed on your local machine.
 
-# Event Management System
-# event-ms
-
-## Screenshot
+## Screenshots
    Homepage
    ![Homepage](https://user-images.githubusercontent.com/43953425/218332154-bb18af6d-f790-4507-af3e-6d1aef59cdd9.png)
    

@@ -16,7 +16,7 @@ Event MS is a powerful and flexible web application built with Laravel and Tailw
 - Responsive Design: The application is designed to work seamlessly on various devices, ensuring a smooth user experience
 
 
-## Setup GUide
+## Setup Guide
 - Clone the repository
 - cd into project directory
 - Copy .env.example to .env

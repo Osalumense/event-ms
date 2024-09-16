@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class Events extends Model
@@ -15,6 +16,7 @@ class Events extends Model
 
     protected $fillable = [
         'title',
+        'slug',
         'start_date',
         'end_date',
         'description',
@@ -87,20 +89,17 @@ class Events extends Model
         return [
             'title' => 'required|string',
             'description' => 'required|string',
-            'bg_image_path' => 'file|image|mimes:jpeg,png,gif,webp',
-            'start_date' => '',
-            'end_date' => '',
-            'account_id' => '',
+            'bg_image_path' => 'nullable|file|image|mimes:jpeg,png,gif,webp',
             'location_address' => 'required|string',
             'location_address_line_1' => 'required|string',
             'start_date' => 'date_format:Y-m-d H:i',
             'end_date' => 'date_format:Y-m-d H:i|after:start_date',
-            'location_country' => 'string',
-            'location_country_code' => 'numeric',
-            'location_state' => 'string',
-            'location_post_code' => 'string',
-            'location_street_number' => 'string',
-            'post_order_display_message' => 'string',
+            'location_country' => 'nullable|string',
+            'location_country_code' => 'nullable|string',
+            'location_state' => 'required|string',
+            'location_post_code' => 'required|string',
+            'location_street_number' => 'nullable|string',
+            'post_order_display_message' => 'nullable|string',
         ];
     }
 
@@ -115,16 +114,22 @@ class Events extends Model
         $this->forceFill($postData);
         $this->save();
 
-        $event = Events::get($this->id);
-        if ($event instanceof Events) {
-            $image = request()->file('bg_image_path');
-            if(!empty($image)){
-                $filename = $postData['slug'] . '.' . $image->getClientOriginalExtension();
-                $event->bg_image_path = $filename;
-                $image->move('images/events/', $filename);
-                $event->save();
+        $slug = Str::slug($postData['title']) . '-' . $this->id;
+        $this->slug = $slug;
+
+        $image = request()->file('bg_image_path');
+        if (!empty($image)) {
+            $destination = public_path('images/events');
+            if (!File::exists($destination)) {
+                File::makeDirectory($destination, 0755, true);
             }
+
+            $filename = $slug . '.' . $image->getClientOriginalExtension();
+            $image->move($destination, $filename);
+            $this->bg_image_path = $filename;
         }
+
+        $this->save();
     }
 
     /**

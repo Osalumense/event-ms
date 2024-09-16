@@ -124,7 +124,7 @@
                     </span>
                     <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
                         <div class="order-1 md:order-2">
-                            @if (Auth::user() && $user['account_id'] == Auth::user()->id)
+                            @if (Auth::check() && $event['user_id'] == Auth::id())
                                     <a href="{{url('/events/').'/'.$event['slug']}}" class="px-2 border-l">Event Dashboard</a>
                             @endif
                             <a href="{{url('/dashboard')}}" class="px-2 border-l">Create an event</a>
@@ -181,4 +181,3 @@
     </body>
     </html>
     @endif
-

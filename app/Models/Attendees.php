@@ -40,10 +40,10 @@ class Attendees extends Model
     {
         return [
             'event_id' => 'required|numeric',
-            'ticket_id' => 'numeric',
+            'ticket_id' => 'nullable|numeric',
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'email' => 'required|string',
+            'email' => 'required|email',
         ];
     }
 

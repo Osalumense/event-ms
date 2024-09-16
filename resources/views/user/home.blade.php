@@ -31,8 +31,8 @@
                     <svg class="w-5 h-5 ml-2 -mr-1 group-hover:translate-x-2 transition-all ease-in duration-500 inline-flex" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </a>
                 {{-- inline-flex w-full items-center justify-center px-5 py-3 text-base font-medium text-center text-indigo-600 border border-indigo-500 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 --}}
-                <a href="#" class="inline-flex w-full items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300">
-                    View events
+                <a href="{{url('/login')}}" class="inline-flex w-full items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300">
+                    Organizer login
                 </a>
             </div>
              
@@ -67,7 +67,7 @@
     <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
         <div class="max-w-screen-xl mb-8 lg:mb-16">
             <h2 class="mb-4 text-4xl font-extrabold text-indigo-600">Designed to make events management easy</h2>
-            <p class="text-gray-500 sm:text-xl">Create a simple event website, set up custom registration processes, manage attendees, payments, tickets and badges.</p>
+            <p class="text-gray-500 sm:text-xl">Create a simple event website, set up custom registration processes, and manage attendees, ticket types, and event operations from one dashboard.</p>
         </div>
         <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
             <div class="shadow-md p-4 rounded-md bg-white">
@@ -88,8 +88,8 @@
                 <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-indigo-100 lg:h-12 lg:w-12 dark:bg-indigo-900">
                     <i class='bx bxs-credit-card bx-sm w-5 h-5 text-indigo-600 lg:w-6 lg:h-6'></i>                    
                 </div>
-                <h3 class="mb-2 text-xl font-bold text-indigo-600">Accept payments</h3>
-                <p class="text-gray-500 dark:text-gray-400">Need to collect payments? EMS allows you accept payments for tickets esaily.</p>
+                <h3 class="mb-2 text-xl font-bold text-indigo-600">Paid ticket setup</h3>
+                <p class="text-gray-500 dark:text-gray-400">Configure free or paid ticket tiers and keep ticket inventory visible for every event.</p>
             </div>
             {{-- <div>
                 <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">

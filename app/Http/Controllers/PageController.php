@@ -87,15 +87,18 @@ class PageController extends Controller
     // public function getEventDetails
     public function renderEditEventPage($slug)
     {
-        $event = Events::where('slug', $slug)->get();
-        $eventId = $event[0]['id'];
+        $event = Events::with('attendees')->where([
+            'slug' => $slug,
+            'user_id' => Auth::id(),
+        ])->firstOrFail();
+        $eventId = $event->id;
         $ticket = Tickets::where('event_id', $eventId)->get();
         $checked_in_attendees = Attendees::where([
             ['event_id', $eventId],
             ['checked_in', '=', 1],
         ])->count();      
         return view('user.events.events')->with([
-            'event' => $event[0],
+            'event' => $event,
             'ticket' => $ticket,
             'checked_in_attendees' => $checked_in_attendees
         ]);
@@ -139,8 +142,8 @@ class PageController extends Controller
             return redirect()->back()->withErrors($validation)->withInput();
         }
         else {
-            if($request->hasFile('file')){
-                $oldImage = '/images/events/'.$event['bg_image_path'];
+            if($request->hasFile('bg_image_path') && !empty($event['bg_image_path'])){
+                $oldImage = public_path('images/events/'.$event['bg_image_path']);
                 deleteFile($oldImage);
             }
             $event->edit();
@@ -161,8 +164,10 @@ class PageController extends Controller
             DB::beginTransaction();
             $event = Events::get($id);
             if ($event instanceof Events) {
-                $oldImage = app_path().'/images/events/'.$event['bg_image_path'];
-                deleteFile($oldImage);
+                if (!empty($event['bg_image_path'])) {
+                    $oldImage = public_path('images/events/'.$event['bg_image_path']);
+                    deleteFile($oldImage);
+                }
                 $query = $event->delete();
                 DB::commit();
                 if ($query) {

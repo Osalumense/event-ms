@@ -30,7 +30,7 @@ class Tickets extends Model
 
     public function event()
     {
-        return $this->belongsTo(Events::class, 'id', 'event_id');
+        return $this->belongsTo(Events::class, 'event_id', 'id');
     }
 
     public static function get($id)
@@ -66,7 +66,7 @@ class Tickets extends Model
             'title' => 'required|max:255|string',
             'price' => 'required|numeric',
             'event_id' => 'required|numeric',
-            'quantity_available' => 'required|numeric',
+            'quantity_available' => 'nullable|numeric|min:1',
         ];
     }
 

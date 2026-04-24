@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Accounts;
+use App\Models\Attendees;
 use App\Models\Events;
 use App\Models\Tickets;
 use App\Models\User;
@@ -132,6 +133,119 @@ class EventManagementFlowTest extends TestCase
         $this->assertSame(1, $ticket->fresh()->quantity_sold);
     }
 
+    public function test_organizer_dashboard_shows_real_owned_metrics(): void
+    {
+        $organizer = $this->createOrganizer();
+
+        $this->createEventForOrganizer($organizer, [
+            'title' => 'Draft Strategy Session',
+            'slug' => 'draft-strategy-session',
+            'description' => 'Planning the next launch.',
+            'start_date' => '2030-05-10 09:00:00',
+            'end_date' => '2030-05-10 10:00:00',
+            'location_address' => 'Studio One',
+            'location_address_line_1' => '12 Market Street',
+            'location_address_line_2' => 'Suite B',
+            'location_state' => 'Paris',
+            'location_post_code' => '75001',
+            'is_active' => 0,
+        ]);
+
+        $liveEvent = $this->createEventForOrganizer($organizer, [
+            'title' => 'Launch Day',
+            'slug' => 'launch-day',
+            'description' => 'A live event for builders.',
+            'start_date' => '2030-05-12 09:00:00',
+            'end_date' => '2030-05-12 17:00:00',
+            'location_address' => 'Innovation Hub',
+            'location_address_line_1' => '123 Builder Street',
+            'location_address_line_2' => 'Suite 4',
+            'location_state' => 'Paris',
+            'location_post_code' => '75001',
+            'is_active' => 1,
+        ]);
+
+        Tickets::create([
+            'title' => 'VIP',
+            'account_id' => $organizer->account_id,
+            'user_id' => $organizer->id,
+            'event_id' => $liveEvent->id,
+            'price' => 149.00,
+            'quantity_available' => 5,
+            'quantity_sold' => 0,
+        ]);
+
+        Attendees::create([
+            'event_id' => $liveEvent->id,
+            'ticket_id' => null,
+            'user_id' => $organizer->id,
+            'account_id' => $organizer->account_id,
+            'order_id' => 'ORD-1001',
+            'checked_in' => 0,
+            'first_name' => 'Grace',
+            'last_name' => 'Hopper',
+            'email' => 'grace@example.com',
+            'amount' => 149,
+        ]);
+
+        $response = $this->actingAs($organizer)->get('/dashboard');
+
+        $response->assertOk();
+        $response->assertSeeText('Your event dashboard');
+        $response->assertSeeText('Launch Day');
+        $response->assertViewHas('metrics', function (array $metrics) {
+            return $metrics['total_events'] === 2
+                && $metrics['published_events'] === 1
+                && $metrics['draft_events'] === 1
+                && $metrics['total_tickets'] === 1
+                && $metrics['total_attendees'] === 1
+                && (float) $metrics['total_revenue'] === 149.0;
+        });
+    }
+
+    public function test_organizer_event_index_can_filter_by_search_and_status(): void
+    {
+        $organizer = $this->createOrganizer();
+
+        $this->createEventForOrganizer($organizer, [
+            'title' => 'Launch Day',
+            'slug' => 'launch-day',
+            'description' => 'A live event for builders.',
+            'start_date' => '2030-05-12 09:00:00',
+            'end_date' => '2030-05-12 17:00:00',
+            'location_address' => 'Innovation Hub',
+            'location_address_line_1' => '123 Builder Street',
+            'location_address_line_2' => 'Suite 4',
+            'location_state' => 'Paris',
+            'location_post_code' => '75001',
+            'is_active' => 1,
+        ]);
+
+        $this->createEventForOrganizer($organizer, [
+            'title' => 'Draft Strategy Session',
+            'slug' => 'draft-strategy-session',
+            'description' => 'Planning the next launch.',
+            'start_date' => '2030-05-10 09:00:00',
+            'end_date' => '2030-05-10 10:00:00',
+            'location_address' => 'Studio One',
+            'location_address_line_1' => '12 Market Street',
+            'location_address_line_2' => 'Suite B',
+            'location_state' => 'Paris',
+            'location_post_code' => '75001',
+            'is_active' => 0,
+        ]);
+
+        $response = $this->actingAs($organizer)->get('/events?q=Launch&status=live');
+
+        $response->assertOk();
+        $response->assertSeeText('Launch Day');
+        $response->assertViewHas('userEvents', function ($events) {
+            return $events->count() === 1
+                && $events->first()->title === 'Launch Day'
+                && (int) $events->first()->is_active === 1;
+        });
+    }
+
     private function createOrganizer(): User
     {
         $account = Accounts::create([
@@ -156,15 +270,12 @@ class EventManagementFlowTest extends TestCase
     {
         $organizer = $this->createOrganizer();
 
-        $event = new Events();
-        $event->forceFill([
+        $event = $this->createEventForOrganizer($organizer, [
             'title' => 'Product Launch',
             'slug' => 'product-launch',
             'description' => 'A polished launch event.',
             'start_date' => '2030-05-12 09:00:00',
             'end_date' => '2030-05-12 17:00:00',
-            'account_id' => $organizer->account_id,
-            'user_id' => $organizer->id,
             'location_address' => 'Innovation Hub',
             'location_address_line_1' => '123 Builder Street',
             'location_address_line_2' => 'Suite 4',
@@ -173,6 +284,16 @@ class EventManagementFlowTest extends TestCase
             'is_active' => 1,
         ]);
 
+        return $event;
+    }
+
+    private function createEventForOrganizer(User $organizer, array $attributes): Events
+    {
+        $event = new Events();
+        $event->forceFill(array_merge([
+            'account_id' => $organizer->account_id,
+            'user_id' => $organizer->id,
+        ], $attributes));
         $event->save();
 
         return $event;

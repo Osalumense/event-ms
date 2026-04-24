@@ -577,6 +577,10 @@
             top: -4px;
         }
 
+        .admin-notification-badge[hidden] {
+            display: none !important;
+        }
+
         .admin-dropdown-menu {
             background: #ffffff;
             border: 1px solid var(--admin-border);
@@ -593,7 +597,11 @@
         }
 
         .admin-notification-menu__header {
+            align-items: flex-start;
             border-bottom: 1px solid var(--admin-border);
+            display: flex;
+            gap: 14px;
+            justify-content: space-between;
             padding: 18px 18px 14px;
         }
 
@@ -618,14 +626,19 @@
         }
 
         .admin-notification-item {
+            align-items: flex-start;
             border-bottom: 1px solid #eef2f7;
             color: inherit;
             display: grid;
             gap: 12px;
-            grid-template-columns: 40px minmax(0, 1fr);
+            grid-template-columns: 40px minmax(0, 1fr) auto;
             padding: 14px 18px;
             text-decoration: none;
             transition: background-color 0.15s ease;
+        }
+
+        .admin-notification-item--read {
+            opacity: 0.72;
         }
 
         .admin-notification-item:hover,
@@ -651,11 +664,46 @@
             width: 40px;
         }
 
+        .admin-notification-item--read .admin-notification-item__icon {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .admin-notification-item__content {
+            color: inherit;
+            display: block;
+            min-width: 0;
+            text-decoration: none;
+        }
+
+        .admin-notification-item__content:hover,
+        .admin-notification-item__content:focus {
+            color: inherit;
+            text-decoration: none;
+        }
+
         .admin-notification-item__title {
             color: var(--admin-text);
+            display: flex;
+            gap: 8px;
+            align-items: center;
             font-size: 0.92rem;
             font-weight: 800;
             line-height: 1.4;
+        }
+
+        .admin-notification-item__dot {
+            background: var(--admin-accent);
+            border-radius: 999px;
+            display: inline-flex;
+            flex-shrink: 0;
+            height: 9px;
+            margin-top: 2px;
+            width: 9px;
+        }
+
+        .admin-notification-item--read .admin-notification-item__dot {
+            display: none;
         }
 
         .admin-notification-item__meta {
@@ -685,6 +733,36 @@
             font-size: 0.9rem;
             padding: 20px 18px;
             text-align: center;
+        }
+
+        .admin-notification-action {
+            align-items: center;
+            background: transparent;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            color: #475569;
+            cursor: pointer;
+            display: inline-flex;
+            font-size: 0.78rem;
+            font-weight: 700;
+            justify-content: center;
+            min-height: 34px;
+            padding: 0 10px;
+            transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .admin-notification-action:hover,
+        .admin-notification-action:focus {
+            background: #f8fafc;
+            border-color: #94a3b8;
+            color: #0f172a;
+            outline: none;
+        }
+
+        .admin-notification-action[disabled] {
+            cursor: default;
+            opacity: 0.45;
         }
 
         @media (max-width: 1279px) {
@@ -755,6 +833,7 @@
                     ->get()
                     ->map(function ($user) {
                         return [
+                            'id' => 'user-' . $user->id,
                             'title' => 'User account updated',
                             'meta' => trim($user->first_name . ' ' . $user->last_name) . ' is set up as ' . \UserType::getValue($user->type) . '.',
                             'href' => url('/admin/users/edit/' . $user->id),
@@ -771,6 +850,7 @@
                         $owner = trim(($event->user->first_name ?? '') . ' ' . ($event->user->last_name ?? ''));
 
                         return [
+                            'id' => 'event-' . $event->id,
                             'title' => $event->title . ' is on the radar',
                             'meta' => ($owner ?: ($event->user->email ?? 'An organizer')) . ' owns this event and it is ' . ($event->is_active ? 'published' : 'still in draft') . '.',
                             'href' => url('/admin/events?q=' . urlencode($event->title)),
@@ -785,6 +865,7 @@
                     ->get()
                     ->map(function ($attendee) {
                         return [
+                            'id' => 'attendee-' . $attendee->id,
                             'title' => trim($attendee->first_name . ' ' . $attendee->last_name) . ' registered',
                             'meta' => 'For ' . ($attendee->event->title ?? 'an event') . ' at $' . number_format((float) $attendee->amount, 2) . '.',
                             'href' => url('/admin/attendees?q=' . urlencode($attendee->email)),
@@ -804,6 +885,7 @@
                     ->get()
                     ->map(function ($event) {
                         return [
+                            'id' => 'owned-event-' . $event->id,
                             'title' => $event->title . ' was updated',
                             'meta' => 'Status: ' . ($event->is_active ? 'published' : 'draft') . '. Public link ready when published.',
                             'href' => url('/events'),
@@ -821,6 +903,7 @@
                     ->get()
                     ->map(function ($attendee) {
                         return [
+                            'id' => 'owned-attendee-' . $attendee->id,
                             'title' => trim($attendee->first_name . ' ' . $attendee->last_name) . ' joined your event',
                             'meta' => 'Registered for ' . ($attendee->event->title ?? 'your event') . '.',
                             'href' => url('/events'),
@@ -841,6 +924,7 @@
         }
 
         $adminNotificationCount = $adminNotifications->count();
+        $adminNotificationStorageKey = $currentAdminUser ? 'eventms_admin_notifications_read_' . $currentAdminUser->id : 'eventms_admin_notifications_read_guest';
     @endphp
 
     <div>
@@ -887,11 +971,12 @@
                     <div class="relative" x-data="{ isOpen: false }">
                       <button
                         @click="isOpen = !isOpen"
-                        class="admin-navbar-button"
+                        class="admin-navbar-button js-admin-notification-toggle"
+                        data-notification-storage-key="{{ $adminNotificationStorageKey }}"
                       >
                         <i class='bx bx-bell bx-sm bx-tada-hover'></i>
                         @if ($adminNotificationCount > 0)
-                            <span class="admin-notification-badge">{{ $adminNotificationCount > 9 ? '9+' : $adminNotificationCount }}</span>
+                            <span class="admin-notification-badge js-admin-notification-badge">{{ $adminNotificationCount > 9 ? '9+' : $adminNotificationCount }}</span>
                         @endif
                       </button>
     
@@ -902,26 +987,32 @@
                         class="admin-dropdown-menu admin-notification-menu"
                       >
                         <div class="admin-notification-menu__header">
-                          <p class="admin-notification-menu__title">Recent activity</p>
-                          <p class="admin-notification-menu__text">
-                            {{ Auth::user()->type == \UserType::SUPER_ADMIN ? 'Latest platform updates across users, events, and registrations.' : 'Latest updates from your event workspace.' }}
-                          </p>
+                          <div>
+                              <p class="admin-notification-menu__title">Recent activity</p>
+                              <p class="admin-notification-menu__text">
+                                {{ Auth::user()->type == \UserType::SUPER_ADMIN ? 'Latest platform updates across users, events, and registrations.' : 'Latest updates from your event workspace.' }}
+                              </p>
+                          </div>
+                          @if ($adminNotifications->isNotEmpty())
+                              <button type="button" class="admin-notification-action js-admin-notifications-mark-all">Mark all as read</button>
+                          @endif
                         </div>
                         @if ($adminNotifications->isEmpty())
                             <div class="admin-notification-empty">No recent activity yet.</div>
                         @else
                             <div class="admin-notification-list">
                                 @foreach ($adminNotifications as $notification)
-                                    <a href="{{ $notification['href'] }}" class="admin-notification-item">
+                                    <div class="admin-notification-item js-admin-notification-item" data-notification-id="{{ $notification['id'] }}">
                                         <span class="admin-notification-item__icon">
                                             <i class='bx {{ $notification['icon'] }}'></i>
                                         </span>
-                                        <span>
-                                            <span class="admin-notification-item__title">{{ $notification['title'] }}</span>
+                                        <a href="{{ $notification['href'] }}" class="admin-notification-item__content js-admin-notification-link" data-notification-id="{{ $notification['id'] }}">
+                                            <span class="admin-notification-item__title"><span class="admin-notification-item__dot"></span>{{ $notification['title'] }}</span>
                                             <span class="admin-notification-item__meta">{{ $notification['meta'] }}</span>
                                             <span class="admin-notification-item__time">{{ optional($notification['timestamp'])->diffForHumans() }}</span>
-                                        </span>
-                                    </a>
+                                        </a>
+                                        <button type="button" class="admin-notification-action js-admin-notification-mark-read" data-notification-id="{{ $notification['id'] }}">Mark as read</button>
+                                    </div>
                                 @endforeach
                             </div>
                         @endif
@@ -1098,6 +1189,108 @@
             isSearchBoxOpen: false,
           }
         };
+
+        const initAdminNotifications = () => {
+          const toggle = document.querySelector('.js-admin-notification-toggle');
+          if (!toggle) {
+            return;
+          }
+
+          const storageKey = toggle.dataset.notificationStorageKey || 'eventms_admin_notifications_read';
+          const readClass = 'admin-notification-item--read';
+
+          const getReadMap = () => {
+            try {
+              return JSON.parse(window.localStorage.getItem(storageKey) || '{}');
+            } catch (error) {
+              return {};
+            }
+          };
+
+          const setReadMap = (value) => {
+            window.localStorage.setItem(storageKey, JSON.stringify(value));
+          };
+
+          const items = Array.from(document.querySelectorAll('.js-admin-notification-item'));
+          const badge = document.querySelector('.js-admin-notification-badge');
+          const markAllButton = document.querySelector('.js-admin-notifications-mark-all');
+
+          const applyState = () => {
+            const readMap = getReadMap();
+            let unreadCount = 0;
+
+            items.forEach((item) => {
+              const notificationId = item.dataset.notificationId;
+              const isRead = !!readMap[notificationId];
+              const markButton = item.querySelector('.js-admin-notification-mark-read');
+
+              item.classList.toggle(readClass, isRead);
+
+              if (markButton) {
+                markButton.disabled = isRead;
+                markButton.textContent = isRead ? 'Read' : 'Mark as read';
+              }
+
+              if (!isRead) {
+                unreadCount += 1;
+              }
+            });
+
+            if (badge) {
+              if (unreadCount > 0) {
+                badge.hidden = false;
+                badge.textContent = unreadCount > 9 ? '9+' : String(unreadCount);
+              } else {
+                badge.hidden = true;
+              }
+            }
+
+            if (markAllButton) {
+              markAllButton.disabled = unreadCount === 0;
+            }
+          };
+
+          const markRead = (notificationId) => {
+            const readMap = getReadMap();
+            readMap[notificationId] = true;
+            setReadMap(readMap);
+            applyState();
+          };
+
+          items.forEach((item) => {
+            const notificationId = item.dataset.notificationId;
+            const markButton = item.querySelector('.js-admin-notification-mark-read');
+            const link = item.querySelector('.js-admin-notification-link');
+
+            if (markButton) {
+              markButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                markRead(notificationId);
+              });
+            }
+
+            if (link) {
+              link.addEventListener('click', () => {
+                markRead(notificationId);
+              });
+            }
+          });
+
+          if (markAllButton) {
+            markAllButton.addEventListener('click', () => {
+              const readMap = getReadMap();
+              items.forEach((item) => {
+                readMap[item.dataset.notificationId] = true;
+              });
+              setReadMap(readMap);
+              applyState();
+            });
+          }
+
+          applyState();
+        };
+
+        document.addEventListener('DOMContentLoaded', initAdminNotifications);
       </script>
       @yield('scripts')
         {{-- @stack('inline-scripts')   --}}

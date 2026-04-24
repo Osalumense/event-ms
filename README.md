@@ -15,6 +15,7 @@ EventMS is a Laravel-based event management platform for organizers who need to 
 - Review all platform events from a centralized admin events workspace
 - Review attendee registrations and revenue from a centralized admin attendees workspace
 - Surface recent platform activity from the admin notification dropdown
+- Mark notifications as read directly from the dropdown, or automatically when opening them
 - Seed both a super admin account and an organizer account for local testing
 
 ## Current status
@@ -138,17 +139,6 @@ Note: on PHP 8.4, Laravel 8 dependencies still emit deprecation warnings even th
 
 ![Organizer dashboard](docs/screenshots/dashboard.png)
 
-## Admin experience
-
-The super admin area now includes:
-
-- `/admin` for platform overview metrics and recent activity panels
-- `/admin/users` for account management
-- `/admin/events` for event oversight
-- `/admin/attendees` for attendee and revenue oversight
-
-The admin shell also includes a recent-activity notification dropdown so the bell icon shows useful updates instead of a placeholder action.
-
 ### Create event
 
 ![Create event](docs/screenshots/create-event.png)
@@ -164,6 +154,37 @@ The admin shell also includes a recent-activity notification dropdown so the bel
 ### Registration page
 
 ![Registration page](docs/screenshots/registration-page.png)
+
+### Admin overview
+
+![Admin overview](docs/screenshots/admin-overview.png)
+
+### Admin users
+
+![Admin users](docs/screenshots/admin-users.png)
+
+### Admin events
+
+![Admin events](docs/screenshots/admin-events.png)
+
+### Admin attendees
+
+![Admin attendees](docs/screenshots/admin-attendees.png)
+
+### Admin notifications
+
+![Admin notifications](docs/screenshots/admin-notifications.png)
+
+## Admin experience
+
+The super admin area now includes:
+
+- `/admin` for platform overview metrics and recent activity panels
+- `/admin/users` for account management
+- `/admin/events` for event oversight
+- `/admin/attendees` for attendee and revenue oversight
+
+The admin shell now includes a real recent-activity notification dropdown, unread counts, per-item mark-as-read actions, mark-all support, and automatic read-state updates when a notification is opened.
 
 ## Useful routes
 

@@ -96,53 +96,40 @@
                   <li>
                     <a
                       href="{{ url('/events') }}"
-                      class="admin-sidebar-link {{ request()->is('events') || request()->is('events/*') ? 'admin-sidebar-link--active' : '' }}"
+                      class="admin-sidebar-link {{ request()->is('events') || (request()->is('events/*') && !request()->is('events/create')) ? 'admin-sidebar-link--active' : '' }}"
                       :class="{'justify-center': !isSidebarOpen}"
                     >
                       <span>
-                        <i class='bx bx-calendar-event bx-sm'></i>
+                          <i class='bx bx-calendar-event bx-sm'></i>
                       </span>
                       <span :class="{ 'lg:hidden': !isSidebarOpen }">Events</span>
                     </a>
                   </li>
                   <li>
                     <a
-                      href="#"
-                      class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                      href="{{ url('/events/create') }}"
+                      class="admin-sidebar-link {{ request()->is('events/create') ? 'admin-sidebar-link--active' : '' }}"
                       :class="{'justify-center': !isSidebarOpen}"
                     >
                       <span>
-                        <i class='bx bx-barcode bx-sm'></i>
+                        <i class='bx bx-plus-circle bx-sm'></i>
                       </span>
-                      <span :class="{ 'lg:hidden': !isSidebarOpen }">Tickets</span>
+                      <span :class="{ 'lg:hidden': !isSidebarOpen }">Create Event</span>
                     </a>
-                </li>
-                <li>
+                  </li>
+                  <li>
                     <a
-                      href="#"
-                      class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                      href="{{ url('/') }}"
+                      class="admin-sidebar-link"
                       :class="{'justify-center': !isSidebarOpen}"
                     >
                       <span>
-                        <i class='bx bxs-user-badge bx-sm'></i>
+                        <i class='bx bx-link-external bx-sm'></i>
                       </span>
-                      <span :class="{ 'lg:hidden': !isSidebarOpen }">Attendees</span>
+                      <span :class="{ 'lg:hidden': !isSidebarOpen }">View Site</span>
                     </a>
-                </li>
+                  </li>
                 @endif
-
-                <li>
-                  <a
-                    href="#"
-                    class="admin-sidebar-link"
-                    :class="{'justify-center': !isSidebarOpen}"
-                  >
-                    <span>
-                      <i class='bx bx-user bx-sm'></i>
-                    </span>
-                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Profile</span>
-                  </a>
-                </li>
 
                 <!-- Sidebar Links... -->
               </ul>

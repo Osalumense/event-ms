@@ -37,21 +37,95 @@ class PageController extends Controller
 
     public function renderOrganizerDashboard()
     {
-        $userId = Auth::user()->id;
-        $totalEvents = Events::getUserEventCount($userId);
-        // $recently_added_users = User::getRecentlyAdded();
-        $recently_added_events = Events::getRecentlyCreatedEvents();
+        $userId = Auth::id();
+        $baseEventsQuery = Events::query()->where('user_id', $userId);
+        $totalEvents = (clone $baseEventsQuery)->count();
+        $publishedEvents = (clone $baseEventsQuery)->where('is_active', 1)->count();
+        $draftEvents = (clone $baseEventsQuery)->where('is_active', 0)->count();
+        $totalTickets = Tickets::query()->where('user_id', $userId)->count();
+        $totalAttendees = Attendees::query()->where('user_id', $userId)->count();
+        $totalRevenue = (float) Attendees::query()->where('user_id', $userId)->sum('amount');
+        $nextEvent = (clone $baseEventsQuery)
+            ->where('start_date', '>=', now())
+            ->orderBy('start_date')
+            ->first();
+        $recentEvents = Events::query()
+            ->withCount(['ticket', 'attendees'])
+            ->where('user_id', $userId)
+            ->orderByDesc('id')
+            ->take(5)
+            ->get();
+        $topEvents = Events::query()
+            ->withCount(['ticket', 'attendees'])
+            ->where('user_id', $userId)
+            ->orderByDesc('attendees_count')
+            ->orderByDesc('ticket_count')
+            ->orderByDesc('id')
+            ->take(3)
+            ->get();
+        $recentRegistrations = Attendees::query()
+            ->with('event')
+            ->where('user_id', $userId)
+            ->orderByDesc('id')
+            ->take(5)
+            ->get();
+
         return view('user.dashboard')->with([
-            'total_events'=> $totalEvents,
-            'recently_added_events' => $recently_added_events,
+            'metrics' => [
+                'total_events' => $totalEvents,
+                'published_events' => $publishedEvents,
+                'draft_events' => $draftEvents,
+                'total_tickets' => $totalTickets,
+                'total_attendees' => $totalAttendees,
+                'total_revenue' => $totalRevenue,
+            ],
+            'nextEvent' => $nextEvent,
+            'recentEvents' => $recentEvents,
+            'topEvents' => $topEvents,
+            'recentRegistrations' => $recentRegistrations,
         ]);
     }
 
-    public function renderEventDashboard()
+    public function renderEventDashboard(Request $request)
     {
-        $events = Events::where('user_id', Auth::user()->id)->get();
+        $userId = Auth::id();
+        $search = trim((string) $request->input('q', ''));
+        $status = (string) $request->input('status', '');
+        $baseEventsQuery = Events::query()->where('user_id', $userId);
+        $query = Events::query()
+            ->withCount(['ticket', 'attendees'])
+            ->where('user_id', $userId)
+            ->orderByDesc('id');
+
+        if ($search !== '') {
+            $query->where(function ($builder) use ($search) {
+                $builder->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('slug', 'like', '%' . $search . '%')
+                    ->orWhere('location_address', 'like', '%' . $search . '%')
+                    ->orWhere('location_state', 'like', '%' . $search . '%');
+            });
+        }
+
+        if ($status === 'live') {
+            $query->where('is_active', 1);
+        } elseif ($status === 'draft') {
+            $query->where('is_active', 0);
+        }
+
+        $events = $query->get();
+
         return view('user.events.index')->with([
-            'userEvents' => $events
+            'userEvents' => $events,
+            'metrics' => [
+                'total_events' => (clone $baseEventsQuery)->count(),
+                'published_events' => (clone $baseEventsQuery)->where('is_active', 1)->count(),
+                'draft_events' => (clone $baseEventsQuery)->where('is_active', 0)->count(),
+                'total_attendees' => Attendees::query()->where('user_id', $userId)->count(),
+            ],
+            'filters' => [
+                'q' => $search,
+                'status' => $status,
+            ],
         ]);
     }
 

@@ -43,8 +43,7 @@
                   @else
                     href="/dashboard"
                   @endif
-                    
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                    class="admin-sidebar-link {{ request()->is('admin') || request()->is('dashboard') ? 'admin-sidebar-link--active' : '' }}"
                     :class="{'justify-center': !isSidebarOpen}"
                   >
                     <span>
@@ -58,7 +57,7 @@
                   <li>
                       <a
                         href="{{ url('/admin/users') }}"
-                        class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                        class="admin-sidebar-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'admin-sidebar-link--active' : '' }}"
                         :class="{'justify-center': !isSidebarOpen}"
                       >
                         <span>
@@ -67,13 +66,37 @@
                         <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
                       </a>
                   </li>
+                  <li>
+                      <a
+                        href="{{ url('/admin/events') }}"
+                        class="admin-sidebar-link {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'admin-sidebar-link--active' : '' }}"
+                        :class="{'justify-center': !isSidebarOpen}"
+                      >
+                        <span>
+                          <i class='bx bx-calendar-event bx-sm'></i>
+                        </span>
+                        <span :class="{ 'lg:hidden': !isSidebarOpen }">Events</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a
+                        href="{{ url('/admin/attendees') }}"
+                        class="admin-sidebar-link {{ request()->is('admin/attendees') || request()->is('admin/attendees/*') ? 'admin-sidebar-link--active' : '' }}"
+                        :class="{'justify-center': !isSidebarOpen}"
+                      >
+                        <span>
+                          <i class='bx bx-group bx-sm'></i>
+                        </span>
+                        <span :class="{ 'lg:hidden': !isSidebarOpen }">Attendees</span>
+                      </a>
+                  </li>
                 @endif
                 
                 @if (Auth::user()->type == \UserType::ADMIN)
                   <li>
                     <a
                       href="{{ url('/events') }}"
-                      class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                      class="admin-sidebar-link {{ request()->is('events') || request()->is('events/*') ? 'admin-sidebar-link--active' : '' }}"
                       :class="{'justify-center': !isSidebarOpen}"
                     >
                       <span>
@@ -111,7 +134,7 @@
                 <li>
                   <a
                     href="#"
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                    class="admin-sidebar-link"
                     :class="{'justify-center': !isSidebarOpen}"
                   >
                     <span>

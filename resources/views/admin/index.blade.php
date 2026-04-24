@@ -1,116 +1,156 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div class="p-3">
-        <div class="grid grid-cols-1 gap-5 mt-6 sm:grid-cols-1 lg:grid-cols-4">
-            <div
-                class="min-w-0 transition-shadow border rounded-lg shadow-sm hover:shadow-lg overflow-hidden bg-white dark:bg-gray-800"
-            >
-                <div class="p-4 flex items-center">
-                <div
-                    class="p-3 rounded-full text-orange-500 dark:text-orange-100 bg-orange-100 dark:bg-orange-500 mr-4"
-                >
-                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5">
-                    <path
-                        d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"
-                    ></path>
-                    </svg>
-                </div>
+<div class="admin-page">
+    <section class="admin-page-header">
+        <div class="admin-page-header__body">
+            <p class="admin-page-header__eyebrow">Super Admin</p>
+            <h1 class="admin-page-header__title">Platform overview</h1>
+            <p class="admin-page-header__text">
+                Get a clear read on platform health, recent event activity, registration volume, and the organizers driving growth.
+            </p>
+        </div>
+        <div class="admin-page-actions">
+            <a href="{{ url('/admin/users') }}" class="admin-btn admin-btn--secondary">Manage users</a>
+            <a href="{{ url('/admin/events') }}" class="admin-btn admin-btn--primary">Review events</a>
+        </div>
+    </section>
+
+    <section class="admin-metric-grid">
+        <article class="admin-metric">
+            <p class="admin-metric__label">Users</p>
+            <p class="admin-metric__value">{{ number_format($metrics['total_users']) }}</p>
+            <p class="admin-metric__meta">{{ number_format($metrics['total_organizers']) }} organizers and {{ number_format($metrics['total_super_admins']) }} super admins</p>
+        </article>
+        <article class="admin-metric">
+            <p class="admin-metric__label">Events</p>
+            <p class="admin-metric__value">{{ number_format($metrics['total_events']) }}</p>
+            <p class="admin-metric__meta">{{ number_format($metrics['published_events']) }} currently live and open</p>
+        </article>
+        <article class="admin-metric">
+            <p class="admin-metric__label">Tickets</p>
+            <p class="admin-metric__value">{{ number_format($metrics['total_tickets']) }}</p>
+            <p class="admin-metric__meta">{{ number_format($metrics['total_attendees']) }} attendee registrations tracked</p>
+        </article>
+        <article class="admin-metric">
+            <p class="admin-metric__label">Revenue</p>
+            <p class="admin-metric__value">${{ number_format($metrics['total_revenue'], 2) }}</p>
+            <p class="admin-metric__meta">Calculated from recorded attendee order totals</p>
+        </article>
+    </section>
+
+    <section class="admin-layout-split">
+        <div class="admin-panel">
+            <div class="admin-panel__header">
                 <div>
-                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Total users
-                    </p>
-                    <p class="text-lg font-semibold text-gray-700">
-                        {{$total_users}}
-                    </p>
+                    <p class="admin-panel__eyebrow">Recent events</p>
+                    <h2 class="admin-panel__title">Newest activity across the platform</h2>
+                    <p class="admin-panel__text">Review what was created most recently, who owns it, and whether it is already published.</p>
                 </div>
-                </div>
+                <a href="{{ url('/admin/events') }}" class="admin-link">View all events</a>
             </div>
-            <div
-                class="min-w-0 transition-shadow border rounded-lg shadow-sm hover:shadow-lg overflow-hidden bg-white dark:bg-gray-800"
-            >
-                <div class="p-4 flex items-center">
-                <div
-                    class="p-3 rounded-full text-green-500 dark:text-green-100 bg-green-100 dark:bg-green-500 mr-4"
-                >
-                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5">
-                    <path
-                        fill-rule="evenodd"
-                        d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                        clip-rule="evenodd"
-                    ></path>
-                    </svg>
-                </div>
-                <div>
-                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Total Revenue
-                    </p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                    $ 46,760.89
-                    </p>
-                </div>
-                </div>
-            </div>
-            <div
-                class="min-w-0 transition-shadow border rounded-lg shadow-sm hover:shadow-lg overflow-hidden bg-white dark:bg-gray-800"
-            >
-                <div class="p-4 flex items-center">
-                <div
-                    class="p-3 rounded-full text-blue-500 dark:text-blue-100 bg-blue-100 dark:bg-blue-500 mr-4"
-                >
-                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5">
-                    <path
-                        d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
-                    ></path>
-                    </svg>
-                </div>
-                <div>
-                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Total tickets sold
-                    </p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                    376,000
-                    </p>
-                </div>
-                </div>
-            </div>
-            <div
-                class="min-w-0 transition-shadow border rounded-lg shadow-sm hover:shadow-lg overflow-hidden bg-white dark:bg-gray-800"
-            >
-                <div class="p-4 flex items-center">
-                <div
-                    class="p-3 rounded-full text-teal-500 dark:text-teal-100 bg-teal-100 dark:bg-teal-500 mr-4"
-                >
-                    <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
-                        <path d="M11 12h6v6h-6z"></path><path d="M19 4h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm.001 16H5V8h14l.001 12z"></path>
-                    </svg>
-                </div>
-                <div>
-                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Total events created
-                    </p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">589,234</p>
-                </div>
+            <div class="admin-panel__body">
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Organizer</th>
+                                <th>Status</th>
+                                <th>Attendees</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($recentEvents as $event)
+                                <tr>
+                                    <td>
+                                        <p class="admin-table__title">{{ $event->title }}</p>
+                                        <p class="admin-table__meta">{{ $event->slug }}</p>
+                                    </td>
+                                    <td>
+                                        <p class="admin-table__meta">
+                                            {{ trim(($event->user->first_name ?? '') . ' ' . ($event->user->last_name ?? '')) ?: ($event->user->email ?? 'Unknown organizer') }}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        @if ($event->is_active)
+                                            <span class="admin-chip admin-chip--success">Published</span>
+                                        @else
+                                            <span class="admin-chip admin-chip--warning">Draft</span>
+                                        @endif
+                                    </td>
+                                    <td class="admin-table__numeric">{{ $event->attendees->count() }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="admin-empty">No events have been created yet.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 gap-5 mt-6 sm:grid-cols-1 lg:grid-cols-3">
-            <div class="col-span-1 bg-white p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg text-gray-500">
-                <h4 class="text-lg font-semibold  mb-3">Recently added users</h4>
-                <hr/>
-                @foreach ($recently_added_users as $recent_users)
-                    <div class="space-y-4">                  
-                        <h5 class="font-semibold my-2">
-                            {{$recent_users['last_name']}} {{$recent_users['first_name']}}                
-                        </h5>
-                        <hr/>
+
+        <div class="admin-stack">
+            <div class="admin-panel">
+                <div class="admin-panel__header">
+                    <div>
+                        <p class="admin-panel__eyebrow">Top organizers</p>
+                        <h2 class="admin-panel__title">Most active accounts</h2>
+                        <p class="admin-panel__text">Spot the organizers contributing the most event activity.</p>
                     </div>
-                @endforeach
+                    <a href="{{ url('/admin/users?type=10') }}" class="admin-link">View organizers</a>
+                </div>
+                <div class="admin-panel__body">
+                    <div class="admin-list">
+                        @forelse ($topOrganizers as $organizer)
+                            <div class="admin-list-item">
+                                <div>
+                                    <p class="admin-list-item__title">{{ trim($organizer->first_name . ' ' . $organizer->last_name) }}</p>
+                                    <p class="admin-list-item__meta">{{ $organizer->email }}</p>
+                                </div>
+                                <div>
+                                    <p class="admin-list-item__stat">{{ $organizer->organized_events_count }}</p>
+                                    <p class="admin-list-item__label">Events</p>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="admin-empty">No organizers available yet.</div>
+                        @endforelse
+                    </div>
+                </div>
             </div>
-            <div class="col-span-2 bg-white p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
+
+            <div class="admin-panel">
+                <div class="admin-panel__header">
+                    <div>
+                        <p class="admin-panel__eyebrow">Newest users</p>
+                        <h2 class="admin-panel__title">Recently added accounts</h2>
+                        <p class="admin-panel__text">Quick access to the latest accounts added to the platform.</p>
+                    </div>
+                    <a href="{{ url('/admin/users/add') }}" class="admin-link">Add user</a>
+                </div>
+                <div class="admin-panel__body">
+                    <div class="admin-list">
+                        @forelse ($recentUsers as $user)
+                            <div class="admin-list-item">
+                                <div>
+                                    <p class="admin-list-item__title">{{ trim($user->first_name . ' ' . $user->last_name) }}</p>
+                                    <p class="admin-list-item__meta">{{ $user->email }}</p>
+                                </div>
+                                <div>
+                                    <p class="admin-list-item__meta" style="text-align: right;">{{ \UserType::getValue($user->type) }}</p>
+                                    <p class="admin-list-item__label">{{ $user->created_at?->format('d M Y') }}</p>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="admin-empty">No users found.</div>
+                        @endforelse
+                    </div>
+                </div>
             </div>
         </div>
-        
-    </div>
-        
+    </section>
+</div>
 @endsection

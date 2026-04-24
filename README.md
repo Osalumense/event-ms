@@ -10,6 +10,11 @@ EventMS is a Laravel-based event management platform for organizers who need to 
 - Support both free registrations and ticket-based registrations
 - Track ticket inventory with sold counts
 - View attendee lists and check-in status from the organizer workspace
+- Give super admins a platform overview with user, event, attendee, and revenue metrics
+- Manage super admin and organizer accounts from a dedicated admin users screen
+- Review all platform events from a centralized admin events workspace
+- Review attendee registrations and revenue from a centralized admin attendees workspace
+- Surface recent platform activity from the admin notification dropdown
 - Seed both a super admin account and an organizer account for local testing
 
 ## Current status
@@ -98,17 +103,27 @@ Super admin account:
 
 ## Testing
 
-Core event-management coverage was added for:
+Core feature coverage now exists for both organizer and admin flows.
+
+Organizer coverage:
 
 - organizer event creation and publishing
 - free event registration
 - ticket-required validation for ticketed events
 - ticketed registration with inventory updates
 
-Run the feature suite with:
+Admin coverage:
+
+- super admin login redirect
+- admin overview metrics
+- user create, update, and delete flow
+- admin event and attendee review pages
+
+Run the feature suites with:
 
 ```bash
 php artisan test tests/Feature/EventManagementFlowTest.php
+php artisan test tests/Feature/AdminManagementFlowTest.php
 ```
 
 Note: on PHP 8.4, Laravel 8 dependencies still emit deprecation warnings even though the tests pass.
@@ -122,6 +137,17 @@ Note: on PHP 8.4, Laravel 8 dependencies still emit deprecation warnings even th
 ### Organizer dashboard
 
 ![Organizer dashboard](docs/screenshots/dashboard.png)
+
+## Admin experience
+
+The super admin area now includes:
+
+- `/admin` for platform overview metrics and recent activity panels
+- `/admin/users` for account management
+- `/admin/events` for event oversight
+- `/admin/attendees` for attendee and revenue oversight
+
+The admin shell also includes a recent-activity notification dropdown so the bell icon shows useful updates instead of a placeholder action.
 
 ### Create event
 
@@ -143,6 +169,10 @@ Note: on PHP 8.4, Laravel 8 dependencies still emit deprecation warnings even th
 
 - `/` for the public landing page
 - `/login` for organizer and admin login
+- `/admin` for the super admin overview
+- `/admin/users` for user administration
+- `/admin/events` for event administration
+- `/admin/attendees` for attendee administration
 - `/dashboard` for the organizer dashboard
 - `/events` for the organizer event workspace
 - `/e/{slug}` for the public event page
@@ -153,4 +183,4 @@ Note: on PHP 8.4, Laravel 8 dependencies still emit deprecation warnings even th
 - upgrade the framework to Laravel 10 or later
 - add a payment provider for paid ticket checkout
 - add attendee check-in actions from the dashboard
-- add richer test coverage for admin management and browser flows
+- add richer browser-level coverage for the refreshed admin UI

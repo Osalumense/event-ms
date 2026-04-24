@@ -12,10 +12,836 @@
       [x-cloak] { 
             display: none !important; 
         }
+
+        :root {
+            --admin-accent: #4f46e5;
+            --admin-accent-dark: #4338ca;
+            --admin-border: #e5e7eb;
+            --admin-text: #0f172a;
+            --admin-muted: #64748b;
+            --admin-surface: #ffffff;
+            --admin-bg: #f3f4f6;
+            --admin-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 10px 30px rgba(15, 23, 42, 0.04);
+        }
+
+        body {
+            background: var(--admin-bg);
+            color: var(--admin-text);
+        }
+
+        .admin-page {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 24px;
+        }
+
+        .admin-page--narrow {
+            margin: 0 auto;
+            max-width: 1120px;
+        }
+
+        .admin-page-header,
+        .admin-card,
+        .admin-panel,
+        .admin-metric {
+            background: var(--admin-surface);
+            border: 1px solid var(--admin-border);
+            box-shadow: var(--admin-shadow);
+            border-radius: 8px;
+        }
+
+        .admin-page-header {
+            align-items: flex-start;
+            display: flex;
+            gap: 24px;
+            justify-content: space-between;
+            padding: 28px 24px;
+        }
+
+        .admin-page-header__eyebrow {
+            color: var(--admin-muted);
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .admin-page-header__title {
+            color: var(--admin-text);
+            font-size: 2.25rem;
+            font-weight: 900;
+            line-height: 1.05;
+            margin: 10px 0 0;
+        }
+
+        .admin-page-header__body {
+            max-width: 760px;
+        }
+
+        .admin-page-header__text {
+            color: #334155;
+            font-size: 1rem;
+            line-height: 1.65;
+            margin: 12px 0 0;
+        }
+
+        .admin-page-actions {
+            align-items: center;
+            display: flex;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+
+        .admin-btn {
+            align-items: center;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            display: inline-flex;
+            font-size: 0.95rem;
+            font-weight: 700;
+            justify-content: center;
+            line-height: 1.2;
+            min-height: 46px;
+            padding: 0 18px;
+            text-decoration: none;
+            transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .admin-btn:hover,
+        .admin-btn:focus {
+            outline: none;
+            text-decoration: none;
+        }
+
+        .admin-btn--primary {
+            background: var(--admin-accent);
+            color: #ffffff;
+        }
+
+        .admin-btn--primary:hover,
+        .admin-btn--primary:focus {
+            background: var(--admin-accent-dark);
+            color: #ffffff;
+        }
+
+        .admin-btn--secondary {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            color: #334155;
+        }
+
+        .admin-btn--secondary:hover,
+        .admin-btn--secondary:focus {
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        .admin-btn--dark {
+            background: #111827;
+            color: #ffffff;
+        }
+
+        .admin-btn--dark:hover,
+        .admin-btn--dark:focus {
+            background: #0f172a;
+            color: #ffffff;
+        }
+
+        .admin-btn--danger {
+            background: #e11d48;
+            color: #ffffff;
+        }
+
+        .admin-btn--danger:hover,
+        .admin-btn--danger:focus {
+            background: #be123c;
+            color: #ffffff;
+        }
+
+        .admin-metric-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .admin-metric {
+            min-height: 152px;
+            padding: 24px 20px;
+        }
+
+        .admin-metric__label {
+            color: var(--admin-muted);
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .admin-metric__value {
+            color: var(--admin-text);
+            font-size: 2.35rem;
+            font-weight: 900;
+            line-height: 1;
+            margin: 18px 0 0;
+        }
+
+        .admin-metric__meta {
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 12px 0 0;
+        }
+
+        .admin-layout-split {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.8fr);
+        }
+
+        .admin-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .admin-panel {
+            overflow: hidden;
+        }
+
+        .admin-panel__header {
+            align-items: flex-start;
+            display: flex;
+            gap: 16px;
+            justify-content: space-between;
+            padding: 24px 24px 0;
+        }
+
+        .admin-panel__header--solid {
+            padding-bottom: 24px;
+        }
+
+        .admin-panel__body {
+            padding: 24px;
+        }
+
+        .admin-panel__eyebrow {
+            color: var(--admin-muted);
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .admin-panel__title {
+            color: var(--admin-text);
+            font-size: 1.85rem;
+            font-weight: 900;
+            line-height: 1.15;
+            margin: 10px 0 0;
+        }
+
+        .admin-panel__text {
+            color: #475569;
+            font-size: 0.96rem;
+            line-height: 1.6;
+            margin: 12px 0 0;
+            max-width: 720px;
+        }
+
+        .admin-link {
+            color: var(--admin-accent);
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .admin-link:hover,
+        .admin-link:focus {
+            color: var(--admin-accent-dark);
+            text-decoration: none;
+        }
+
+        .admin-filter-form {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: minmax(0, 1.5fr) minmax(220px, 0.75fr) minmax(220px, 0.75fr) auto;
+        }
+
+        .admin-filter-form--compact {
+            grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.75fr) auto;
+        }
+
+        .admin-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .admin-label {
+            color: #334155;
+            font-size: 0.93rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .admin-input,
+        .admin-select {
+            appearance: none;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            color: var(--admin-text);
+            font-size: 0.95rem;
+            min-height: 48px;
+            padding: 0 14px;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+            width: 100%;
+        }
+
+        .admin-input:focus,
+        .admin-select:focus {
+            border-color: var(--admin-accent);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.14);
+            outline: none;
+        }
+
+        .admin-field__hint {
+            color: var(--admin-muted);
+            font-size: 0.82rem;
+            margin-top: 8px;
+        }
+
+        .admin-field__error {
+            color: #e11d48;
+            font-size: 0.84rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .admin-form-grid {
+            display: grid;
+            gap: 18px 20px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .admin-filter-actions {
+            align-items: flex-end;
+            display: flex;
+            gap: 12px;
+        }
+
+        .admin-form-section {
+            padding: 24px;
+        }
+
+        .admin-form-section + .admin-form-section {
+            border-top: 1px solid var(--admin-border);
+        }
+
+        .admin-form-section__title {
+            color: var(--admin-text);
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .admin-form-section__text {
+            color: var(--admin-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin: 8px 0 0;
+            max-width: 720px;
+        }
+
+        .admin-empty {
+            color: var(--admin-muted);
+            font-size: 0.95rem;
+            padding: 28px 0;
+            text-align: center;
+        }
+
+        .admin-form-actions {
+            align-items: center;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 28px;
+        }
+
+        .admin-form-actions--between {
+            justify-content: space-between;
+        }
+
+        .admin-table-wrap {
+            overflow-x: auto;
+        }
+
+        .admin-table {
+            border-collapse: collapse;
+            min-width: 100%;
+            width: 100%;
+        }
+
+        .admin-table thead {
+            background: #f8fafc;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            border-top: 1px solid var(--admin-border);
+            padding: 16px 18px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .admin-table thead th {
+            border-top: none;
+            color: var(--admin-muted);
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .admin-table__title {
+            color: var(--admin-text);
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.35;
+            margin: 0;
+        }
+
+        .admin-table__meta {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.55;
+            margin-top: 4px;
+        }
+
+        .admin-table__numeric {
+            font-weight: 800;
+        }
+
+        .admin-table__actions {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .admin-chip {
+            border-radius: 999px;
+            display: inline-flex;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            padding: 7px 11px;
+            text-transform: uppercase;
+        }
+
+        .admin-chip--success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .admin-chip--warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .admin-chip--info {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .admin-chip--muted {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .admin-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .admin-list-item {
+            align-items: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            display: flex;
+            gap: 18px;
+            justify-content: space-between;
+            padding: 16px 18px;
+        }
+
+        .admin-list-item__title {
+            color: var(--admin-text);
+            font-size: 1rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .admin-list-item__meta {
+            color: var(--admin-muted);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .admin-list-item__stat {
+            color: var(--admin-text);
+            font-size: 1.6rem;
+            font-weight: 900;
+            line-height: 1;
+            text-align: right;
+        }
+
+        .admin-list-item__label {
+            color: var(--admin-muted);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            margin-top: 4px;
+            text-align: right;
+            text-transform: uppercase;
+        }
+
+        .admin-sidebar-link {
+            align-items: center;
+            border-radius: 6px;
+            color: #475569;
+            display: flex;
+            font-weight: 600;
+            gap: 10px;
+            min-height: 44px;
+            padding: 10px 12px;
+            text-decoration: none;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+
+        .admin-sidebar-link:hover {
+            background: #f8fafc;
+            color: var(--admin-text);
+            text-decoration: none;
+        }
+
+        .admin-sidebar-link--active {
+            background: #eef2ff;
+            color: var(--admin-accent-dark);
+        }
+
+        .admin-navbar-button {
+            align-items: center;
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 999px;
+            color: #0f172a;
+            display: inline-flex;
+            height: 46px;
+            justify-content: center;
+            position: relative;
+            transition: background-color 0.15s ease, border-color 0.15s ease;
+            width: 46px;
+        }
+
+        .admin-navbar-button:hover,
+        .admin-navbar-button:focus {
+            background: #e5e7eb;
+            border-color: #cbd5e1;
+            outline: none;
+        }
+
+        .admin-notification-badge {
+            align-items: center;
+            background: #ef4444;
+            border: 2px solid #ffffff;
+            border-radius: 999px;
+            color: #ffffff;
+            display: inline-flex;
+            font-size: 0.68rem;
+            font-weight: 800;
+            height: 20px;
+            justify-content: center;
+            min-width: 20px;
+            padding: 0 5px;
+            position: absolute;
+            right: -4px;
+            top: -4px;
+        }
+
+        .admin-dropdown-menu {
+            background: #ffffff;
+            border: 1px solid var(--admin-border);
+            border-radius: 8px;
+            box-shadow: 0 16px 38px rgba(15, 23, 42, 0.14);
+        }
+
+        .admin-notification-menu {
+            margin-top: 12px;
+            position: absolute;
+            right: 0;
+            width: 360px;
+            z-index: 40;
+        }
+
+        .admin-notification-menu__header {
+            border-bottom: 1px solid var(--admin-border);
+            padding: 18px 18px 14px;
+        }
+
+        .admin-notification-menu__title {
+            color: var(--admin-text);
+            font-size: 1rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .admin-notification-menu__text {
+            color: var(--admin-muted);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .admin-notification-list {
+            display: flex;
+            flex-direction: column;
+            max-height: 360px;
+            overflow-y: auto;
+        }
+
+        .admin-notification-item {
+            border-bottom: 1px solid #eef2f7;
+            color: inherit;
+            display: grid;
+            gap: 12px;
+            grid-template-columns: 40px minmax(0, 1fr);
+            padding: 14px 18px;
+            text-decoration: none;
+            transition: background-color 0.15s ease;
+        }
+
+        .admin-notification-item:hover,
+        .admin-notification-item:focus {
+            background: #f8fafc;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .admin-notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .admin-notification-item__icon {
+            align-items: center;
+            background: #eef2ff;
+            border-radius: 8px;
+            color: var(--admin-accent-dark);
+            display: inline-flex;
+            font-size: 1.2rem;
+            height: 40px;
+            justify-content: center;
+            width: 40px;
+        }
+
+        .admin-notification-item__title {
+            color: var(--admin-text);
+            font-size: 0.92rem;
+            font-weight: 800;
+            line-height: 1.4;
+        }
+
+        .admin-notification-item__meta {
+            color: #475569;
+            font-size: 0.84rem;
+            line-height: 1.5;
+            margin-top: 3px;
+        }
+
+        .admin-notification-item__time {
+            color: var(--admin-muted);
+            font-size: 0.78rem;
+            margin-top: 6px;
+        }
+
+        .admin-notification-menu__footer {
+            align-items: center;
+            border-top: 1px solid var(--admin-border);
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            padding: 14px 18px;
+        }
+
+        .admin-notification-empty {
+            color: var(--admin-muted);
+            font-size: 0.9rem;
+            padding: 20px 18px;
+            text-align: center;
+        }
+
+        @media (max-width: 1279px) {
+            .admin-metric-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .admin-layout-split {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .admin-page-header {
+                flex-direction: column;
+            }
+
+            .admin-page-actions {
+                justify-content: flex-start;
+                margin-left: 0;
+            }
+
+            .admin-filter-form,
+            .admin-filter-form--compact,
+            .admin-form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-page {
+                gap: 20px;
+                padding: 18px;
+            }
+
+            .admin-page-header {
+                padding: 22px 18px;
+            }
+
+            .admin-page-header__title {
+                font-size: 1.9rem;
+            }
+
+            .admin-panel__header,
+            .admin-panel__body,
+            .admin-metric,
+            .admin-form-section {
+                padding: 18px;
+            }
+
+            .admin-metric-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style> 
     @yield('styles')
 </head>
 <body>
+    @php
+        $currentAdminUser = Auth::user();
+        $adminNotifications = collect();
+
+        if ($currentAdminUser) {
+            if ((string) $currentAdminUser->type === (string) \UserType::SUPER_ADMIN) {
+                $recentUsersForFeed = \App\Models\User::query()
+                    ->orderByDesc('id')
+                    ->take(3)
+                    ->get()
+                    ->map(function ($user) {
+                        return [
+                            'title' => 'User account updated',
+                            'meta' => trim($user->first_name . ' ' . $user->last_name) . ' is set up as ' . \UserType::getValue($user->type) . '.',
+                            'href' => url('/admin/users/edit/' . $user->id),
+                            'icon' => 'bx-user-plus',
+                            'timestamp' => $user->created_at,
+                        ];
+                    });
+
+                $recentEventsForFeed = \App\Models\Events::with('user')
+                    ->orderByDesc('id')
+                    ->take(3)
+                    ->get()
+                    ->map(function ($event) {
+                        $owner = trim(($event->user->first_name ?? '') . ' ' . ($event->user->last_name ?? ''));
+
+                        return [
+                            'title' => $event->title . ' is on the radar',
+                            'meta' => ($owner ?: ($event->user->email ?? 'An organizer')) . ' owns this event and it is ' . ($event->is_active ? 'published' : 'still in draft') . '.',
+                            'href' => url('/admin/events?q=' . urlencode($event->title)),
+                            'icon' => 'bx-calendar-event',
+                            'timestamp' => $event->created_at,
+                        ];
+                    });
+
+                $recentAttendeesForFeed = \App\Models\Attendees::with('event')
+                    ->orderByDesc('id')
+                    ->take(3)
+                    ->get()
+                    ->map(function ($attendee) {
+                        return [
+                            'title' => trim($attendee->first_name . ' ' . $attendee->last_name) . ' registered',
+                            'meta' => 'For ' . ($attendee->event->title ?? 'an event') . ' at $' . number_format((float) $attendee->amount, 2) . '.',
+                            'href' => url('/admin/attendees?q=' . urlencode($attendee->email)),
+                            'icon' => 'bx-group',
+                            'timestamp' => $attendee->created_at,
+                        ];
+                    });
+
+                $adminNotifications = $recentUsersForFeed
+                    ->merge($recentEventsForFeed)
+                    ->merge($recentAttendeesForFeed);
+            } else {
+                $recentOwnedEvents = \App\Models\Events::query()
+                    ->where('user_id', $currentAdminUser->id)
+                    ->orderByDesc('id')
+                    ->take(3)
+                    ->get()
+                    ->map(function ($event) {
+                        return [
+                            'title' => $event->title . ' was updated',
+                            'meta' => 'Status: ' . ($event->is_active ? 'published' : 'draft') . '. Public link ready when published.',
+                            'href' => url('/events'),
+                            'icon' => 'bx-calendar-event',
+                            'timestamp' => $event->updated_at ?: $event->created_at,
+                        ];
+                    });
+
+                $recentOwnedAttendees = \App\Models\Attendees::with('event')
+                    ->whereHas('event', function ($query) use ($currentAdminUser) {
+                        $query->where('user_id', $currentAdminUser->id);
+                    })
+                    ->orderByDesc('id')
+                    ->take(3)
+                    ->get()
+                    ->map(function ($attendee) {
+                        return [
+                            'title' => trim($attendee->first_name . ' ' . $attendee->last_name) . ' joined your event',
+                            'meta' => 'Registered for ' . ($attendee->event->title ?? 'your event') . '.',
+                            'href' => url('/events'),
+                            'icon' => 'bx-user-check',
+                            'timestamp' => $attendee->created_at,
+                        ];
+                    });
+
+                $adminNotifications = $recentOwnedEvents->merge($recentOwnedAttendees);
+            }
+
+            $adminNotifications = $adminNotifications
+                ->sortByDesc(function ($item) {
+                    return optional($item['timestamp'])->timestamp ?? 0;
+                })
+                ->take(6)
+                ->values();
+        }
+
+        $adminNotificationCount = $adminNotifications->count();
+    @endphp
 
     <div>
         <div class="flex h-screen overflow-y-hidden bg-white" x-data="setup()" x-init="$refs.loading.classList.add('hidden')">
@@ -61,25 +887,51 @@
                     <div class="relative" x-data="{ isOpen: false }">
                       <button
                         @click="isOpen = !isOpen"
-                        class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 focus:outline-none focus:ring hover:animate-pulse"
+                        class="admin-navbar-button"
                       >
                         <i class='bx bx-bell bx-sm bx-tada-hover'></i>
+                        @if ($adminNotificationCount > 0)
+                            <span class="admin-notification-badge">{{ $adminNotificationCount > 9 ? '9+' : $adminNotificationCount }}</span>
+                        @endif
                       </button>
     
                       <!-- Dropdown card -->
                       <div
                         @click.away="isOpen = false"
                         x-show.transition.opacity="isOpen"
-                        class="absolute w-48 max-w-md mt-3 transform bg-white rounded-md shadow-xl -translate-x-3/4 min-w-max"
+                        class="admin-dropdown-menu admin-notification-menu"
                       >
-                        <ul class="flex flex-col p-2 my-2 space-y-1">
-                          <li>
+                        <div class="admin-notification-menu__header">
+                          <p class="admin-notification-menu__title">Recent activity</p>
+                          <p class="admin-notification-menu__text">
+                            {{ Auth::user()->type == \UserType::SUPER_ADMIN ? 'Latest platform updates across users, events, and registrations.' : 'Latest updates from your event workspace.' }}
+                          </p>
+                        </div>
+                        @if ($adminNotifications->isEmpty())
+                            <div class="admin-notification-empty">No recent activity yet.</div>
+                        @else
+                            <div class="admin-notification-list">
+                                @foreach ($adminNotifications as $notification)
+                                    <a href="{{ $notification['href'] }}" class="admin-notification-item">
+                                        <span class="admin-notification-item__icon">
+                                            <i class='bx {{ $notification['icon'] }}'></i>
+                                        </span>
+                                        <span>
+                                            <span class="admin-notification-item__title">{{ $notification['title'] }}</span>
+                                            <span class="admin-notification-item__meta">{{ $notification['meta'] }}</span>
+                                            <span class="admin-notification-item__time">{{ optional($notification['timestamp'])->diffForHumans() }}</span>
+                                        </span>
+                                    </a>
+                                @endforeach
+                            </div>
+                        @endif
+                        <div class="admin-notification-menu__footer">
+                            <a href="{{ Auth::user()->type == \UserType::SUPER_ADMIN ? url('/admin') : url('/dashboard') }}" class="admin-link">Open dashboard</a>
                             <form method="POST" action="{{ route('logout') }}">
-                              @csrf
-                              <button class="w-full mr-2 px-2 py-1 transition rounded-md hover:bg-green-100">Logout</button>
+                                @csrf
+                                <button class="admin-btn admin-btn--secondary" type="submit">Logout</button>
                             </form>
-                          </li>
-                        </ul>
+                        </div>
                       </div>
                     </div>
     
@@ -251,4 +1103,3 @@
         {{-- @stack('inline-scripts')   --}}
 </body>
 </html>
-

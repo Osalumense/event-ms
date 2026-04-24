@@ -17,10 +17,11 @@ class Attendees extends Model
         'user_id',
         'account_id',
         'order_id',
-        'account_id',
+        'checked_in',
         'first_name',
         'last_name',
-        'email'
+        'email',
+        'amount',
     ];
 
     protected $casts = [
@@ -60,4 +61,9 @@ class Attendees extends Model
     {
         return $this->belongsTo(Tickets::class, 'ticket_id', 'id');
     }
-}
+
+    public function event()
+    {
+        return $this->belongsTo(Events::class, 'event_id', 'id');
+    }
+}    

@@ -56,21 +56,16 @@ Route::group(['middleware' => ['admin-auth']], function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => ['super-admin-auth']], function () {
-        Route::get('/', [HomeController::class, 'Adminindex']);
-        Route::get('/users/fetch', [HomeController::class, 'displayCounsellors']);
-        Route::get('/users', [HomeController::class, 'renderCounsellorsPage']);
-        Route::get('/vehicles', [HomeController::class, 'renderVehiclesViewPage']);
-        // Route::get('/users/fetch', [HomeController::class, 'displayUsers']);
+        Route::get('/', [HomeController::class, 'adminIndex'])->name('admin.dashboard');
+        Route::get('/users', [HomeController::class, 'renderUsersPage'])->name('admin.users.index');
         Route::get('/users/edit/{id}', [HomeController::class, 'editUsers']);
-        // Route::get('/user/edit/{id}', [HomeController::class, 'editCounsellor']);
         Route::post('/users/update', [HomeController::class,'updateCounsellors']);
-        Route::post('/users/delete/{id}', [HomeController::class, 'deleteCounsellor']);
+        Route::delete('/users/delete/{id}', [HomeController::class, 'deleteCounsellor']);
         Route::get('/users/add', [HomeController::class, 'renderNewUserPage']);
         Route::post('/users/add', [HomeController::class, 'createNewUser']);
-        
-        // Route::post('/user/delete/{id}', [HomeController::class, 'deleteCounsellor']);       
+        Route::get('/events', [HomeController::class, 'renderEventsPage'])->name('admin.events.index');
+        Route::get('/attendees', [HomeController::class, 'renderAttendeesPage'])->name('admin.attendees.index');
     });
 });
 
 Auth::routes();
-

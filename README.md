@@ -4,6 +4,7 @@ EventMS is a Laravel-based event management platform for organizers who need to 
 
 ## What the app can do
 
+- Give organizers a focused dashboard with live event, draft, ticket, registration, and revenue metrics
 - Create and update events with date, time, venue, description, and cover image
 - Publish events to a public event URL
 - Manage multiple ticket tiers for an event
@@ -94,12 +95,31 @@ The app will be available at `http://127.0.0.1:8000`.
 
 Organizer account:
 
+- Profile: `Event organizer 1`
+- Role: `Organizer`
 - Email: `user@ems.com`
 - Password: `password`
 
 Super admin account:
 
+- Profile: `Super Admin`
+- Role: `Super Admin`
 - Email: `admin@ems.com`
+- Password: `password`
+
+## Organizer experience
+
+The organizer side now includes a complete creator workflow:
+
+- `/dashboard` for the organizer overview, upcoming event summary, top-performing events, and latest registrations
+- `/events` for the organizer event workspace with search, status filters, publish actions, and event cleanup
+- `/events/create` for the refreshed event creation form
+- `/events/{slug}` for event editing, ticket management, and attendee review
+
+The seeded organizer profile used for local testing is:
+
+- Name: `Event organizer 1`
+- Email: `user@ems.com`
 - Password: `password`
 
 ## Testing
@@ -131,7 +151,7 @@ Note: on PHP 8.4, Laravel 8 dependencies still emit deprecation warnings even th
 
 ## Screenshots
 
-### Homepage
+### Public homepage
 
 ![Homepage](docs/screenshots/homepage.png)
 
@@ -139,11 +159,11 @@ Note: on PHP 8.4, Laravel 8 dependencies still emit deprecation warnings even th
 
 ![Organizer dashboard](docs/screenshots/dashboard.png)
 
-### Create event
+### Organizer create event
 
 ![Create event](docs/screenshots/create-event.png)
 
-### Event workspace
+### Organizer event workspace
 
 ![Event workspace](docs/screenshots/event-workspace.png)
 
@@ -151,7 +171,7 @@ Note: on PHP 8.4, Laravel 8 dependencies still emit deprecation warnings even th
 
 ![Public event page](docs/screenshots/public-event-page.png)
 
-### Registration page
+### Public registration page
 
 ![Registration page](docs/screenshots/registration-page.png)
 

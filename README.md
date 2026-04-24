@@ -109,7 +109,7 @@ Super admin account:
 
 ## Organizer experience
 
-The organizer side now includes a complete creator workflow:
+The organizer side now uses the user dashboard pages and includes a complete creator workflow:
 
 - `/dashboard` for the organizer overview, upcoming event summary, top-performing events, and latest registrations
 - `/events` for the organizer event workspace with search, status filters, publish actions, and event cleanup
@@ -155,17 +155,17 @@ Note: on PHP 8.4, Laravel 8 dependencies still emit deprecation warnings even th
 
 ![Homepage](docs/screenshots/homepage.png)
 
-### Organizer dashboard
+### Organizer dashboard (`/dashboard`)
 
-![Organizer dashboard](docs/screenshots/dashboard.png)
+![Organizer dashboard](docs/screenshots/organizer-dashboard.png)
 
-### Organizer create event
+### Organizer create event (`/events/create`)
 
-![Create event](docs/screenshots/create-event.png)
+![Create event](docs/screenshots/organizer-create-event.png)
 
-### Organizer event workspace
+### Organizer event workspace (`/events`)
 
-![Event workspace](docs/screenshots/event-workspace.png)
+![Event workspace](docs/screenshots/organizer-event-workspace.png)
 
 ### Public event page
 
